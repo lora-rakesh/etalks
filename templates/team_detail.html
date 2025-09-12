@@ -1,0 +1,136 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Team Details</small>
+    </a>
+</li>
+{% endblock %}
+
+
+{% block sidebar %}
+<link rel="stylesheet" href="{% static 'css/task_management.css' %}">
+
+<li class="sidebar-item">
+    <a href="{% url 'assign_task' %}" class="btn mt-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-stopwatch mx-3" viewBox="0 0 16 16">
+            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+        </svg>
+        Assign Tasks
+    </a>
+</li>
+
+<li class="sidebar-item">
+    <a href="{% url 'my_tasks' %}" class="btn mt-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar2-check mx-3" viewBox="0 0 16 16">
+            <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        My Tasks
+    </a>
+</li>
+<li class="sidebar-item">
+    <a href="{% url 'list_teams' %}" class="btn mt-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-people-fill mx-3" viewBox="0 0 16 16">
+            <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6m-5.784 6A2.24 2.24 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.3 6.3 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5"/>
+        </svg>
+        Manage Teams
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="row">
+    <!-- Team Information Section -->
+    <div class="col-lg-8 mb-4">
+      <div class="card border-0 shadow-sm">
+        <div class="card-body p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h4 mb-0 text-primary">{{ team.name }}</h2>
+            <span class="badge bg-light text-dark">
+              Created {{ team.created_at|timesince }} ago
+            </span>
+          </div>
+          
+          <!-- Professional Description Box -->
+          <div class="description-box bg-light p-4 rounded mb-4">
+            <div class="d-flex align-items-center mb-3">
+              <i class="bi bi-card-text fs-4 text-muted me-2"></i>
+              <h5 class="mb-0 text-secondary">Team Description</h5>
+            </div>
+            <div class="description-content bg-white p-3 rounded border">
+              {% if team.description %}
+                <p class="mb-0">{{ team.description }}</p>
+              {% else %}
+                <p class="text-muted mb-0">No description provided</p>
+              {% endif %}
+            </div>
+          </div>
+          
+          <div class="team-meta d-flex">
+            <div class="me-4">
+              <span class="text-muted small">Created by</span>
+              <p class="mb-0 fw-medium">{{ team.created_by.get_full_name|default:team.created_by.username }}</p>
+            </div>
+            <div>
+              <span class="text-muted small">Created on</span>
+              <p class="mb-0">{{ team.created_at|date:"M d, Y" }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Team Members Section -->
+    <div class="col-lg-4">
+      <div class="card border-0 shadow-sm h-100">
+        <div class="card-header bg-white border-bottom py-3">
+          <h5 class="mb-0 d-flex align-items-center">
+            <i class="bi bi-people me-2 text-primary"></i>
+            Team Members <span class="badge bg-primary ms-2">{{ members.count }}</span>
+          </h5>
+        </div>
+        <div class="card-body p-0">
+          <ul class="list-group list-group-flush">
+            {% for member in members %}
+              <li class="list-group-item border-0 py-3 px-4 d-flex align-items-center">
+                <div class="avatar me-3 bg-light rounded-circle d-flex align-items-center justify-content-center" style="width: 36px; height: 36px;">
+                  <span class="text-muted">{{ member.get_full_name|slice:":1"|default:member.username|slice:":1" }}</span>
+                </div>
+                <div class="flex-grow-1">
+                  <h6 class="mb-0">{{ member.get_full_name|default:member.username }}</h6>
+                  <small class="text-muted">{{ member.email }}</small>
+                </div>
+                {% if member == request.user %}
+                  <span class="badge bg-light text-dark border">You</span>
+                {% endif %}
+              </li>
+            {% empty %}
+              <li class="list-group-item border-0 py-3 px-4 text-center text-muted">
+                No members in this team
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .description-box {
+    border-left: 3px solid #0d6efd;
+  }
+  .description-content {
+    min-height: 100px;
+  }
+  .avatar {
+    background-color: #f0f2f5;
+    font-weight: 500;
+  }
+</style>
+{% endblock %}

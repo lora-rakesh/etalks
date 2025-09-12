@@ -1,0 +1,225 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Leave Balance</small>
+    </a>
+</li>
+{% endblock %}
+
+
+{% block sidebar %}
+
+<link rel="stylesheet" href="{% static 'css/leave_balance.css' %}">
+
+<li class="sidebar-item">
+    <a href="/muster" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-stopwatch mx-3" viewBox="0 0 16 16">
+            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+        </svg>
+        Muster Update
+    </a>
+</li>
+
+<li class="sidebar-item">
+    <a href="/muster_status" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar2-check mx-3" viewBox="0 0 16 16">
+            <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        Muster Status
+    </a>
+</li>
+
+<li class="sidebar-item">
+    <a href="/leave_balance" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar2-week mx-3" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        Leave and Balance
+    </a>
+</li>
+
+<li class="sidebar-item">
+    <a href="/holidays" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-diamond mx-3" viewBox="0 0 16 16">
+            <path d="M7.987 16a1.53 1.53 0 0 1-1.07-.448L.45 9.082a1.53 1.53 0 0 1 0-2.165L6.917.45a1.53 1.53 0 0 1 2.166 0l6.469 6.468A1.53 1.53 0 0 1 16 8.013a1.53 1.53 0 0 1-.448 1.07l-6.47 6.469A1.53 1.53 0 0 1 7.988 16zM7.639 1.17 4.766 4.044 8 7.278l3.234-3.234L8.361 1.17a.51.51 0 0 0-.722 0M8.722 8l3.234 3.234 2.873-2.873c.2-.2.2-.523 0-.722l-2.873-2.873zM8 8.722l-3.234 3.234 2.873 2.873c.2.2.523.2.722 0l2.873-2.873zM7.278 8 4.044 4.766 1.17 7.639a.51.51 0 0 0 0 .722l2.874 2.873z"/>
+        </svg>
+        List of Holiday's
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <div class="mt-2">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% if show_no_leave_message %}
+  <div class="col-12 text-center my-5" style="font-size:1.1rem; color: #222; font-weight: 500; font-family: Arial, sans-serif;">
+      {{ no_leave_message }}
+  </div>
+{% else %}
+  {% if leave_messages %}
+    <div class="alert-messages my-3">
+      {% for msg in leave_messages %}
+        <div class="alert alert-warning text-center">
+          {{ msg }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+<div class="row mx-auto mt-3 container-fluid">
+
+    <div class="col form-control mt-2 pb-2" style="background-color:#f1f1f1; border-color: black; shadow-lg">
+
+        <div class='text'>
+            <h5 class="text-center mx-auto mt-2">Apply for Leave</h5>
+            <hr class='text-center mx-auto col-4'>
+        </div>
+
+        <form action="{% url 'leave_request' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+
+            <div class="row mx-auto">
+                <div class="col">
+                    <div class="mt-2">
+                        <label for="employee" class="form-label">Employee ID</label>
+                        <input type="text" class="form-control" name="employee" id="employee" value="{{ user.employee_id }}" required style="border-color: rgb(124, 124, 124);">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="mt-2">
+                        <label for="leave_type" class="form-label">Leave Type</label>
+                        <select id="leave_type" name="leave_type" class="form-control" required style="border-color:rgb(119, 119, 119);">
+                            <option value="">--Select--</option>
+                            <option value="advance_privilege">Advance Privilege Leave</option>
+                            <option value="sick">Sick Leave</option>
+                            <option value="casual">Casual Leave</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mx-auto mt-2">
+                <div class="col">
+                    <div class="mt-2">
+                        <label for="start_date" class="form-label" style='color: black;'>Leave from date</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date" required style="border-color:rgb(119, 119, 119);">
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="mt-2">
+                        <label for="end_date" class="form-label" style='color: black;'>Leave till date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date" required style="border-color:rgb(119, 119, 119);">
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <div class="mx-auto">
+                        <label for="days_requested" class="form-label">Days Requested</label>
+                        <input type="number" name="days_requested" min="1" placeholder='0' class="form-control" required style="border-color:rgb(119, 119, 119);">
+                    </div>
+                </div>
+
+                <div class="mt-2">
+                    <div class="mx-auto">
+                        <label for="reason" class="form-label">Reason</label>
+                        <textarea id="reason" name="reason" class="form-control" required style="border-color:rgb(119, 119, 119);"></textarea>
+                    </div>
+                </div>
+
+                <div class="col text-center mt-3 pb-1">
+                    <button type="submit" class='btn btn-sm btn-dark'>Request for leave</button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+    <div class="col container-fluid mx-auto">
+
+        <h5 class="text-center mx-auto mt-3">Remaining leave balance</h5>
+        <hr class='col-4 mx-auto'>
+
+        <div class="col leave-tables">
+            <table>
+                <thead style='background-color:rgb(228, 228, 228)'>
+                    <tr>
+                        <th>Leave Type</th>
+                        <th>Balance</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Advance Privilege Leave</td>
+                        <td>{{ leave.advance_privilege_leave }} Days</td>
+                    </tr>
+                    <tr>
+                        <td>Sick Leave</td>
+                        <td>{{ leave.sick_leave }} Days</td>
+                    </tr>
+                    <tr>
+                        <td>Casual Leave</td>
+                        <td>{{ leave.casual_leave }} Days</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container-fluid py-3">
+    <h5 class="text-center mt-4">Remaining Leave's</h5>
+    <hr class='col-4 mx-auto mb-4'>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr class="bg-light">
+                    <th class="align-middle">Type</th>
+                    <th class="align-middle">Start Date</th>
+                    <th class="align-middle">End Date</th>
+                    <th class="align-middle">Reason</th>
+                    <th class="align-middle">Status</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                {% for request in leave_request %}
+                <tr>
+                    <td class="align-middle">{{ request.leave_type }}</td>
+                    <td class="align-middle">{{ request.start_date }}</td>
+                    <td class="align-middle">{{ request.end_date }}</td>
+                    <td class="align-middle">{{ request.reason }}</td>
+                    <td class="align-middle">{{ request.status }}</td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td class="text-center py-3" colspan="5">No leave requests found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endif %}
+
+{% endblock %}

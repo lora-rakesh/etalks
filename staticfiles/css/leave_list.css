@@ -1,0 +1,112 @@
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    background: #fff;
+}
+
+.table {
+    width: 100%;
+    min-width: 700px; 
+    border-collapse: collapse;
+}
+
+.table thead {
+    background-color: #f1f1f1;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+    #leave-balances {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 24px;
+    }
+    
+    #leave-balances h5 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 16px;
+    }
+
+    #create-leave-link {
+        display: inline-block;
+        background-color:#0191B4
+;
+        border-color:#0191B4
+;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 500;
+        margin-bottom: 24px;
+        transition: background-color 0.2s;
+    }
+
+    #create-leave-link:hover {
+        background-color:rgb(51, 189, 33);
+    }
+    #leave-table-container {
+        overflow-x: auto;
+        background: white;
+        
+     
+    }
+
+  
+
+    #leave-table tr:hover {
+        background-color: #FFFFFF
+;
+    }
+
+    #leave-table td a {
+        color: #4a90e2;
+        text-decoration: none;
+        margin-right: 12px;
+        transition: color 0.2s;
+    }
+
+    #leave-table td a:hover {
+        color: #357abd;
+    }
+    #employee_id{
+        width:30vw;
+    }
+    .btn-primary{
+        margin-left:467px;
+        margin-top:-90px;
+    }
+    .btn-primary:hover {
+        background-color:#1d4ed8;
+    }
+    @media(max-width:480px){
+        .btn-primary{
+        margin-left:167px;
+       
+    }
+    #employee_id{
+        width:40vw;
+    }
+    .epm{
+        margin-top:75px;
+    }
+    }
+
+    @media (min-width: 768px) {
+        #leave-balances {
+            padding: 16px;
+        }
+        .btn-primary{
+        margin-left:467px;
+       
+    }
+    }

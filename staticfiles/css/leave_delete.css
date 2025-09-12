@@ -1,0 +1,98 @@
+
+    .modal-container {
+        background-color: white;
+        border-radius: 8px;
+        padding: 24px;
+        width: 90%;
+        max-width: 500px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: auto;
+        margin-top: 150px;
+    }
+
+    .modal-header {
+        margin-bottom: 20px;
+    }
+
+    .modal-title {
+        color:rgb(231, 36, 10);
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 0;
+    }
+
+    .leave-details {
+        background-color: #f9fafb;
+        border-radius: 6px;
+        padding: 16px;
+        margin-bottom: 20px;
+    }
+
+    .detail-row {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 12px;
+    }
+
+    .detail-row:last-child {
+        margin-bottom: 0;
+    }
+
+    .label {
+        font-weight: 500;
+        color: #374151;
+    }
+
+    .value {
+        color: #1f2937;
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 24px;
+    }
+
+    .btn {
+        padding: 8px 16px;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        transition: background-color 0.2s;
+    }
+
+    .btn-delete {
+        background-color: #0191B4
+;
+        color: white;
+    }
+
+    .btn-delete:hover {
+        background-color:rgb(76, 146, 19);
+    }
+
+    .btn-cancel {
+        background-color: #e5e7eb;
+        color: #374151;
+    }
+
+    .btn-cancel:hover {
+        background-color: #d1d5db;
+    }
+
+    @media (max-width: 640px) {
+        .modal-container {
+            width: 95%;
+            padding: 16px;
+        }
+
+        .button-group {
+            flex-direction: column-reverse;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }

@@ -1,0 +1,608 @@
+
+
+/* Modal Styles */
+@media(max-width:420px){
+    .modal{
+        height:32vh;
+        width:100% !important;
+    }
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    color: white;
+    padding: 15px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+.modal-header h4 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 15px;
+    background:rgb(227, 227, 227);
+}
+
+/* Task Items */
+.task-item {
+    background: white;
+    padding: 10px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+}
+
+.task-item strong {
+    font-size: 1rem;
+    color: #333;
+}
+
+.task-completed-message {
+    background: #007bff;
+    color: white;
+    padding: 5px;
+    margin-top: 5px;
+    border-radius: 4px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.task-pending-message {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.task-pending-message label {
+    display: flex;
+    align-items: center;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    background:#007bff;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background 0.3s;
+}
+
+.submit-btn:hover {
+    background:#1d4ed8;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .modal-header h4 {
+        font-size: 1rem;
+    }
+
+    .task-item {
+        font-size: 0.9rem;
+    }
+
+    .task-pending-message {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .submit-btn {
+        width: 100%;
+        margin-top: 5px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-header {
+        padding: 10px;
+    }
+
+    .modal-body {
+        padding: 10px;
+    }
+
+    .task-item {
+        padding: 8px;
+    }
+
+    .task-completed-message,
+    .submit-btn {
+        font-size: 0.8rem;
+    }
+}
+
+/* Apply styles only to the #myTaskInterface and its children */
+#myTaskInterface.interface {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+#myTaskInterface.interface h3 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+#myTaskInterface.interface .calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#myTaskInterface.interface .calendar-header button {
+    background-color:#007bff;
+    color: #fff;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#myTaskInterface.interface .calendar-header button:hover {
+    background-color:#1d4ed8;
+}
+
+#myTaskInterface.interface #currentMonthYear {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+#myTaskInterface.interface #calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+}
+
+#myTaskInterface.interface #calendar .day {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#myTaskInterface.interface #calendar .day:hover {
+    background-color: #f1f1f1;
+}
+
+#myTaskInterface.interface #taskDetails {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+/* Modal styles */
+#taskModal.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(42, 42, 42, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#taskModal.modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color:rgba(190, 108, 26, 0.79);
+    color: #fff;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+
+#taskModal.modal .modal-header h4 {
+    margin: 0;
+}
+
+#taskModal.modal .modal-header .modal-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+#taskModal.modal #taskModalContent {
+    padding: 20px;
+    background-color: #fff;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Success Alert Box */
+#successAlert.alert-box {
+    display: none;
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 4px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+#successAlert.alert-box .alert-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#successAlert.alert-box #alertCloseBtn {
+    background: none;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+    margin-left: 20px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #myTaskInterface.interface {
+        padding: 10px;
+    }
+
+    #myTaskInterface.interface #calendar {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    #myTaskInterface.interface #calendar {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    #myTaskInterface.interface .calendar-header button {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    #myTaskInterface.interface #currentMonthYear {
+        font-size: 16px;
+    }
+}
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --warning-color: #f39c12;
+    --success-color: #27ae60;
+    --danger-color: #e74c3c;
+    --background-color: #FFFFFF
+;
+    --card-background: #ffffff;
+    --text-primary: #2c3e50;
+    --text-secondary: #7f8c8d;
+    --border-radius: 8px;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+main {
+    max-width: 1800px;
+    
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.dashboard-title {
+    color: var(--primary-color);
+    font-weight: 600;
+    margin-bottom: 2.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.dashboard-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 2px;
+    background: var(--accent-color);
+}
+
+.section-title {
+    color: var(--secondary-color);
+    font-size: 1.4rem;
+    margin: 2.5rem 0 1.5rem;
+    text-align: left;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+}
+
+.performance-card {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.performance-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.performance-card h5 {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+}
+
+.progress {
+    height: 15px;
+    border-radius: calc(var(--border-radius) / 2);
+    background-color: rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+}
+
+.progress-bar {
+    border-radius: calc(var(--border-radius) / 2);
+    transition: width 0.8s ease-in-out;
+}
+
+/* Chart Container */
+.chart-container {
+    background: var(--card-background);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    min-height: 300px;
+}
+
+/* Best Employee Section */
+.best-employee {
+    background: var(--card-background);
+    border: 1px solid var(--warning-color);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    margin: 2.5rem auto;
+    max-width: 800px;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-sm);
+    text-align: center;
+}
+
+.best-employee .fw-bold {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin: 0.5rem 0;
+}
+
+.best-employee .text-muted {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    main {
+        padding: 1rem;
+    }
+
+    .chart-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .dashboard-title {
+        font-size: 1.8rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .performance-card {
+        padding: 1.25rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .dashboard-title {
+        font-size: 1.6rem;
+        margin-bottom: 2rem;
+    }
+
+    .section-title {
+        font-size: 1.2rem;
+        margin: 2rem 0 1rem;
+    }
+
+    .performance-card {
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+
+    .chart-container {
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+    }
+
+    .best-employee {
+        padding: 1.5rem;
+        margin: 2rem auto;
+    }
+}
+
+@media (max-width: 576px) {
+    main {
+        padding: 0.75rem;
+    }
+
+    .dashboard-title {
+        font-size: 1.4rem;
+    }
+
+    .section-title {
+        font-size: 1.1rem;
+    }
+
+    .performance-card h5 {
+        font-size: 1rem;
+    }
+
+    .best-employee .fw-bold {
+        font-size: 1.1rem;
+    }
+
+    .chart-container {
+        padding: 1rem;
+        margin: 1rem 0;
+    }
+}
+
+#profileDropdownItem {
+    position: relative;
+}
+
+#profileImage {
+    border-radius: 50%;
+    transition: transform 0.2s ease;
+}
+
+#profileImage:hover {
+    transform: scale(1.2);
+}
+
+#profileDropdownMenu {
+    min-width: 250px;
+    padding: 8px 0;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    animation: dropdownFade 0.2s ease;
+}
+
+#profileDropdownMenu .dropdown-item {
+    padding: 8px 20px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#profileDropdownMenu .dropdown-item i {
+    font-size: 16px;
+    width: 20px;
+    text-align: center;
+}
+
+#profileDropdownMenu .dropdown-item:hover {
+    background-color: #0191B4
+;
+    transform: translateX(2px);
+}
+
+#profileGreeting {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.dropdown-divider {
+    margin: 5px 0;
+    opacity: 0.1;
+}
+
+@keyframes dropdownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    #profileDropdownMenu {
+        width: 220px;
+    }
+
+    #profileDropdownMenu .dropdown-item {
+        padding: 8px 16px;
+        font-size: 14px;
+    }
+
+    #profileDropdownMenu .dropdown-item i {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    #profileImage {
+        width: 24px;
+        height: 24px;
+    }
+
+    #profileDropdownMenu {
+        width: 200px;
+    }
+
+    #profileDropdownMenu .dropdown-item {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    #profileDropdownMenu .dropdown-item i {
+        font-size: 13px;
+        width: 16px;
+    }
+}

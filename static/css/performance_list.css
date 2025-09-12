@@ -1,0 +1,115 @@
+
+    #filter-form {
+        background: white;
+        padding: 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 24px;
+        max-width: 1200px;
+        margin: 0 auto 24px;
+    }
+
+    #filter-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        align-items: flex-end;
+    }
+
+    .filter-group {
+        flex: 1 1 300px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: #333;
+    }
+
+    input,
+    select {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 14px;
+        transition: all 0.2s ease-in-out;
+    }
+    form input {
+        margin-bottom:1px;
+    }
+
+    input:focus,
+    select:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 4px rgba(0, 123, 255, 0.3);
+        outline: none;
+    }
+
+    #filter-button {
+        background-color:#0191B4
+;
+        color: white;
+        padding: 10px 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: background 0.2s ease-in-out;
+        width: 100%;
+    }
+
+    #filter-button:hover {
+        background-color:#1d4ed8;
+    }
+
+          /* Make table container responsive */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on mobile */
+    background: #fff;
+}
+
+/* Ensure table structure remains intact */
+.table {
+    width: 100%;
+    min-width: 700px; /* Ensures the table does not shrink */
+    border-collapse: collapse;
+}
+
+/* Styling for table headers */
+.table thead {
+    background-color: #f1f1f1;
+}
+
+/* Prevent text wrapping */
+.table th, .table td {
+    white-space: nowrap;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Responsive scrolling on small screens */
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+        display: block;
+        width: 100%;
+    }
+
+    .table {
+        min-width: 800px; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    .table {
+        min-width: 900px;
+    }
+
+}
+

@@ -1,0 +1,137 @@
+/* General page styling */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Section Headers */
+h2, h4 {
+    font-weight: 600;
+    border-left: 5px solid #0d6efd;
+    padding-left: 10px;
+    margin-top: 2rem;
+    color: #1f2937;
+}
+
+/* Card Styling */
+.card {
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Card Header Colors */
+.card-header.bg-primary {
+    background-color: #0d6efd !important;
+}
+
+.card-header.bg-success {
+    background-color: #0d6efd !important;
+}
+
+.card-header.bg-warning {
+    background-color: #0d6efd !important;
+    color: #212529 !important;
+}
+
+/* Form Elements */
+form label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    display: inline-block;
+}
+
+form select, form textarea, form input[type="text"], form input[type="email"] {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    transition: border-color 0.3s ease-in-out;
+}
+
+form select:focus, form textarea:focus, form input:focus {
+    border-color: #0d6efd;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.25);
+}
+
+/* Buttons */
+.btn {
+    border-radius: 6px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.btn i {
+    margin-right: 5px;
+}
+
+/* Table Styling */
+.table th, .table td {
+    vertical-align: middle !important;
+    font-size: 0.92rem;
+}
+
+.table thead {
+    font-weight: 600;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #f1f3f5;
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #fafafa;
+}
+
+/* Badges */
+.badge {
+    padding: 0.4em 0.65em;
+    font-size: 0.85rem;
+    font-weight: 500;
+    border-radius: 0.35rem;
+}
+
+/* Muted */
+.text-muted {
+    color: #6c757d !important;
+}
+
+/* Ticket section icons */
+h4 i, h2 i {
+    color: #0d6efd;
+    margin-right: 5px;
+}
+
+/* Responsive spacing */
+@media screen and (max-width: 768px) {
+    .card-body .row .col-md-4,
+    .card-body .row .col-md-5 {
+        margin-bottom: 1rem;
+    }
+    table {
+        font-size: 0.85rem;
+    }
+}
+
+/* Submit button hover effect */
+.btn-outline-primary:hover,
+.btn-outline-success:hover,
+.btn-outline-warning:hover {
+    color: white !important;
+}
+
+/* Mark Seen buttons */
+button[name="mark_seen_tl"],
+button[name="mark_seen_hr"] {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+}
+
+/* Truncate description nicely */
+td .description {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,74 @@
+.close {
+    position: absolute;
+    right: 10px;
+    top: 6px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.close:hover {
+    color: #000;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 18px;
+    flex-wrap: wrap; /* Allows buttons to adjust */
+}
+
+.modal-buttons button {
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    border: none;
+    transition: background-color 0.2s;
+    min-width: 120px; /* Ensures equal-sized buttons */
+}
+
+#confirmDelete {
+    background-color: #dc3545;
+    color: white;
+}
+
+#confirmDelete:hover {
+    background-color: #c82333;
+}
+
+#cancelDelete {
+    background-color: #6c757d;
+    color: white;
+}
+
+#cancelDelete:hover {
+    background-color: #5a6268;
+}
+
+/* Ensures no collision on small screens */
+@media (max-width: 375px) {
+    .modal-content {
+        width: 95%;
+        max-width: 290px;
+        padding: 14px;
+    }
+
+    .modal-buttons {
+        flex-direction: column; /* Stack buttons vertically */
+        gap: 12px;
+    }
+
+    .modal-buttons button {
+        width: 100%;
+        font-size: 13px;
+    }
+
+    .close {
+        font-size: 18px;
+    }
+}

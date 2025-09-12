@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Manage Logo</small>
+    </a>
+</li>
+{% endblock %}
+
+{% block sidebar %}
+<li class="sidebar-item">
+    <a href="/manage_logo" class="sidebar-link" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" 
+            class="bi bi-image mx-3" viewBox="0 0 16 16">
+            <path d="M14.002 3a1 1 0 0 1 1 1v8.002a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4.002a1 1 0 0 1 1-1h12zm0-1H2a2 2 0 0 0-2 2v8.002a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4.002a2 2 0 0 0-2-2z"/>
+            <path d="M10.648 8.646a.5.5 0 0 1 .704.07l2.646 3.3A.5.5 0 0 1 13.6 13H2.4a.5.5 0 0 1-.398-.984l3.646-2.364 2.163 2.163a.5.5 0 0 0 .707 0l2.13-2.13z"/>
+            <path d="M4.502 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+        </svg>
+        Logo Management
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<div class="logo-container">
+    <h2 class="logo-heading">Company Logo</h2>
+
+    {% if company.logo %}
+        <div class="current-logo">
+            <img src="{{ company.logo.url }}" alt="Company Logo">
+            <div class="logo-actions">
+                <form method="post" enctype="multipart/form-data" style="margin-top: 12px;">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-edit">Update Logo</button>
+                </form>
+                <a href="{% url 'delete_logo' %}" class="btn btn-delete">Delete</a>
+            </div>
+        </div>
+    {% else %}
+        <p class="no-logo">No logo uploaded yet.</p>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-add">Upload Logo</button>
+        </form>
+    {% endif %}
+</div>
+
+<style>
+.logo-container {
+    max-width: 400px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.logo-heading {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #444;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 8px;
+}
+
+.current-logo img {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 10px 0;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #f9f9f9;
+}
+
+.logo-actions {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn {
+    padding: 6px 14px;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.btn-edit {
+    background: #007bff;
+    color: #fff;
+    border: none;
+}
+
+.btn-edit:hover {
+    background: #0056b3;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: #fff;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-delete:hover {
+    background: #a71d2a;
+}
+
+.btn-add {
+    background: #28a745;
+    color: #fff;
+    padding: 7px 16px;
+    border: none;
+    display: inline-block;
+    margin-top: 12px;
+}
+
+.btn-add:hover {
+    background: #1e7e34;
+}
+
+.no-logo {
+    color: #888;
+    font-size: 0.95rem;
+}
+</style>
+{% endblock %}

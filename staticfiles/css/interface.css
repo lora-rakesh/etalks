@@ -1,0 +1,87 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Spacing between logo and form */
+    align-items: center;
+    width: 100%;
+    max-width: 800px; /* Container width adjusted */
+    background-color: white;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 40%; /* The logo takes up 40% of the container */
+}
+
+.logo img {
+    max-width: 100%;
+    height: 200px;
+    width: 400px; /* Adjusted width of the logo */
+}
+
+.form-box {
+    width: 100%;
+    max-width: 370px; /* The form box remains the same width */
+}
+
+.form-box form {
+    padding: 30px;
+    background-color: #fff;
+    border: 1px solid #ccc; /* Box around the form */
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-box h1 {
+    text-align: left;
+    font-size: 2em;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.form-box label {
+    font-size: 1em;
+    margin-bottom: 10px;
+    font-weight: bold;
+    display: block;
+}
+
+.form-box input[type="text"] {
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    box-sizing: border-box;
+}
+
+.form-box button {
+    padding: 10px 20px;
+    background-color: 007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.form-box button:hover {
+    background-color: #1d4ed8;
+}

@@ -1,0 +1,80 @@
+
+.table-responsive {
+    width: 100%;
+    overflow-x: auto; 
+    -webkit-overflow-scrolling: touch; 
+    border: 1px solid #ddd; 
+    background: #fff;
+}
+
+.table {
+    width: 100%;
+    min-width: 700px;
+    border-collapse: collapse;
+}
+
+.table thead {
+    background-color: #f1f1f1;
+}
+
+.table th, .table td {
+    white-space: nowrap;
+    text-align: center;
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+.btn {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.8rem;
+}
+.ruby{
+    display:ruby;
+}
+.buton{
+        width:10vw;
+        height:5vh
+    }
+
+@media (max-width: 768px) {
+    .table-responsive {
+        overflow-x: auto;
+        display: block;
+        width: 100%;
+    }
+
+    .table {
+        min-width: 800px; 
+    }
+}
+
+
+@media (max-width: 480px) {
+    .table {
+        min-width: 900px;
+    }
+
+    .btn {
+        padding: 0.2rem 0.4rem;
+        font-size: 0.7rem;
+    }
+    
+    .ruby{
+        display:inline;
+    }
+    .buton{
+        width:25vw;
+        height:4vh
+    }
+}
+.btns{
+    background-color:#0191B4
+;
+    border-color:#0191B4
+;
+}
+.btns:hover{
+    background-color:#1d4ed8;
+    border-color: #0191B4
+;
+}

@@ -1,0 +1,200 @@
+{% extends 'base.html' %}
+
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Performance Tracker</small>
+    </a>
+</li>
+{% endblock %}
+
+
+{% block sidebar %}
+
+{% if request.user.is_authenticated and request.user.role == 'HR' or request.user.role == 'Manager' or request.user.is_superuser %}
+
+<li class="sidebar-item">
+    <a href="{% url 'performance_entry' %}" class="sidebar-link active" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-file-break mx-3" viewBox="0 0 16 16">
+            <path d="M0 10.5a.5.5 0 0 1 .5-.5h15a.5.5 0 0 1 0 1H.5a.5.5 0 0 1-.5-.5M12 0H4a2 2 0 0 0-2 2v7h1V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v7h1V2a2 2 0 0 0-2-2m2 12h-1v2a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1v-2H2v2a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2z"/>
+        </svg>
+        Performance Tracker
+    </a>
+</li>
+
+{% endif %}
+
+<li class="sidebar-item">
+    <a href="{% url 'performance_page' %}" class="sidebar-link active" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bar-chart mx-3" viewBox="0 0 16 16">
+            <path d="M4 11H2v3h2zm5-4H7v7h2zm5-5v12h-2V2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1z"/>
+        </svg>
+        Performance Board
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/performance_page.css' %}">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<h2 class="dashboard-title text-center">Employee Performance Dashboard</h2>
+                    
+<h4 class="section-title">Top 5 Daily Performers</h4>
+<div class="row" id="employee-list"></div>
+                    
+<div class="chart-container">
+    <canvas id="dailyPerformanceChart"></canvas>
+</div>
+                    
+<h4 class="section-title">Best Employee of the Month</h4>
+<div id="best-employee" class="best-employee"></div>
+                    
+<div class="chart-container">
+    <canvas id="monthlyPerformanceChart"></canvas>
+</div>
+
+
+
+<script>
+    async function fetchPerformanceData() {
+        try {
+            const response = await fetch('https://aihr4u.com/api/top-daily-performers/');
+            const dailyPerformers = await response.json();
+            renderEmployees(dailyPerformers);
+            renderDailyChart(dailyPerformers);
+        } catch (error) {
+            console.error("Error fetching daily performers:", error);
+        }
+
+        try {
+            const response = await fetch('https://aihr4u.com/api/best-employee-month/');
+            const bestEmployee = await response.json();
+            renderBestEmployee(bestEmployee);
+            renderMonthlyChart(bestEmployee);
+        } catch (error) {
+            console.error("Error fetching best employee of the month:", error);
+        }
+    }
+
+    function renderEmployees(employees) {
+        const employeeList = document.getElementById("employee-list");
+        employeeList.innerHTML = "";
+        employees.forEach(emp => {
+            employeeList.innerHTML += `
+                <div class="col-md-4 col-lg-4 mb-4">
+                    <div class="performance-card p-3">
+                        <h5>${emp.employee_name} (ID: ${emp.employee_id})</h5>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" 
+                                 style="width: ${emp.performance_score}%; background-color: ${getColor(emp.performance_score)}" 
+                                 aria-valuenow="${emp.performance_score}" 
+                                 aria-valuemin="0" 
+                                 aria-valuemax="100">
+                                ${emp.performance_score}%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function getColor(performance) {
+        if (performance >= 90) return 'blue';  
+        if (performance >= 80 && performance<90) return '#2ecc71'; 
+        if (performance >= 70 && performance<80) return '#007bff'; 
+        if (performance >= 60 && performance<70) return '#ffc107'; 
+        if (performance >= 50 && performance<60) return '#28a745'; 
+        if (performance >= 40 && performance<50) return '#17a2b8'; 
+        if (performance >= 30 && performance<40) return '#dc3545';
+        if (performance >= 20 && performance<30) return 'red'; 
+        // if (performance < 20) return 'red'; 
+        if (performance >= 0 && performance <20) return  'red';
+        // return '#e74c3c';  
+        // '#007bff', '#28a745', '#ffc107', '#dc3545', '#17a2b8
+    }
+
+    function renderDailyChart(employees) {
+        const ctxDaily = document.getElementById('dailyPerformanceChart').getContext('2d');
+        new Chart(ctxDaily, {
+            type: 'bar',
+            data: {
+                labels: employees.map(emp => emp.employee_name),
+                datasets: [{
+                    label: 'Performance %',
+                    data: employees.map(emp => emp.performance_score),
+                    backgroundColor: employees.map(emp => getColor(emp.performance_score)),
+                    borderRadius: 3,
+                    barThickness: 35,  
+                    maxBarThickness: 35
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 100,
+                        grid: {
+                            display: true,
+                            color: 'rgba(0, 0, 0, 0.1)'
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
+    }
+
+    function renderBestEmployee(bestEmployee) {
+        document.getElementById("best-employee").innerHTML = `
+            <div class="text-center">
+                <div class="mb-2">🏆 Best Performer</div>
+                <div class="fw-bold">${bestEmployee.employee_name}</div>
+                <div class="text-muted">ID: ${bestEmployee.employee_id}</div>
+                <div class="mt-2 fw-bold" style="color: #f1c40f">${bestEmployee.performance_score}% Performance</div>
+            </div>
+        `;
+    }
+
+    function renderMonthlyChart(bestEmployee) {
+        const ctxMonthly = document.getElementById('monthlyPerformanceChart').getContext('2d');
+        new Chart(ctxMonthly, {
+            type: 'pie',
+            data: {
+                labels: [bestEmployee.employee_name, 'Others'],
+                datasets: [{
+                    data: [bestEmployee.performance_score, 100 - bestEmployee.performance_score],
+                    backgroundColor: ['#f1c40f', '#ecf0f1'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+    }
+
+    fetchPerformanceData();
+</script>
+
+{% endblock %}

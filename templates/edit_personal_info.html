@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Edit Personal Info</small>
+    </a>
+</li>
+{% endblock %}
+
+
+{% block sidebar %}
+<link rel="stylesheet" href="{% static 'css/edit_personal_info.css' %}">
+<li class="sidebar-item">
+    <a href="/dashboard" class="sidebar-link active" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-columns-gap mx-3" viewBox="0 0 16 16">
+            <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/>
+        </svg>
+        Dashboard
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+
+<main class="content py-4">
+    <div class="form-container">
+        <h2 class="text-center form-title">Edit Personal Information</h2>
+
+        {% if messages %}
+        <div id="messages-container">
+            {% for message in messages %}
+            <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} fade-out">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <form method="POST" class="styled-form">
+            {% csrf_token %}
+
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
+                {{ field }}
+                {% if field.errors %}
+                <div class="error-feedback">
+                    {% for error in field.errors %}
+                    <span class="text-danger">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+
+            <div class="button-group">
+                <button type="submit" class="submit-btn">Save Changes</button>
+                <a href="{% url 'profile' %}" class="cancel-btn">Cancel</a>
+            </div>
+        </form>
+    </div>
+</main>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get all alert messages
+            const messages = document.querySelectorAll('.alert');
+           
+            if (messages.length > 0) {
+                
+                setTimeout(function() {
+                    messages.forEach(function(message) {
+                        message.style.opacity = '0';
+                    });
+                   
+                    // Remove messages from DOM after fade out
+                    setTimeout(function() {
+                        const messagesContainer = document.getElementById('messages-container');
+                        if (messagesContainer) {
+                            messagesContainer.remove();
+                        }
+                    }, 500);
+                }, 1000);
+            }
+        });
+        </script>
+
+
+
+{% endblock %}

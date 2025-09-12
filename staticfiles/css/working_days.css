@@ -1,0 +1,185 @@
+    #workingDaysPage {
+       
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+        color: #1e293b;
+    }
+
+    #workingDaysTitle {
+        color: #1e293b;
+        font-weight: 600;
+        font-size: 2rem;
+        margin-bottom: 2.5rem;
+        position: relative;
+        text-align: center;
+    }
+
+    #workingDaysTitle::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100px;
+        height: 4px;
+        background: #0191B4
+;
+        border-radius: 2px;
+    }
+
+    #workingDaysFilterForm {
+        background: white;
+        padding: 1.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        margin-bottom: 2rem;
+    }
+
+    #workingDaysFilterForm label {
+        font-weight: 500;
+        color: #64748b;
+        margin-bottom: 0.5rem;
+    }
+
+    #monthYearSelect,
+    #employeeIdInput {
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+
+    #monthYearSelect:focus,
+    #employeeIdInput:focus {
+        border-color: #0191B4
+;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        outline: none;
+    }
+
+    #filterSubmitBtn {
+        background-color: #0191B4
+;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-weight: 500;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        color: white;
+        width: auto;
+        margin-top:32px;
+    }
+
+    #filterSubmitBtn:hover {
+        background-color:#1d4ed8;
+        transform: translateY(-1px);
+    }
+
+    #workingDaysTableContainer {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+    }
+
+    #workingDaysTable {
+        width: 100%;
+        margin-bottom: 0;
+        border-collapse: collapse;
+    }
+
+    #workingDaysTable thead th {
+        background-color: #0191B4
+;
+        color: white;
+        font-weight: 500;
+        padding: 1rem;
+        border: none;
+        text-transform: uppercase;
+        font-size: 0.9rem;
+        letter-spacing: 0.5px;
+    }
+
+    #workingDaysTable tbody td {
+        padding: 1rem;
+        vertical-align: middle;
+        border-color: #e2e8f0;
+        color: #1e293b;
+    }
+
+    #workingDaysTable tbody tr:hover {
+        background-color: #eff6ff;
+    }
+
+    #workingDaysTable tbody tr:nth-of-type(odd) {
+        background-color: rgba(0, 0, 0, 0.02);
+    }
+
+    #tableResponsiveWrapper {
+        overflow-x: auto;
+    }
+
+    #tableResponsiveWrapper::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    #tableResponsiveWrapper::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 4px;
+    }
+
+    #tableResponsiveWrapper::-webkit-scrollbar-thumb {
+        background:rgb(215, 216, 213);
+        border-radius: 4px;
+    }
+
+    #tableResponsiveWrapper::-webkit-scrollbar-thumb:hover {
+        background:rgb(171, 172, 171);
+    }
+
+    @media (max-width: 992px) {
+        #workingDaysFilterForm form {
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        #filterFormGroup {
+            width: 100%;
+        }
+
+        #filterSubmitBtn {
+            width: 100%;
+            margin-top: 1rem;
+        }
+    }
+
+    @media (max-width: 768px) {
+        #workingDaysTitle {
+            font-size: 1.5rem;
+        }
+
+        #workingDaysTable thead th {
+            font-size: 0.8rem;
+            padding: 0.75rem;
+        }
+
+        #workingDaysTable tbody td {
+            font-size: 0.9rem;
+            padding: 0.75rem;
+        }
+    }
+
+    @media (max-width: 576px) {
+        #workingDaysContainer {
+            padding: 1rem 0.5rem;
+        }
+
+        #workingDaysFilterForm {
+            padding: 1rem;
+        }
+
+        #workingDaysTableContainer {
+            border-radius: 8px;
+        }
+    }

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HRMS Assistant</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/fontawesome.min.css">
+    {% load static %} <link rel="stylesheet" href="{% static 'css/chat_bot.css' %}">
+
+</head>
+<body>
+    <div class="welcome-container">
+        <h1>HRMS Assistant</h1>
+        <p>Your AI-powered HR management assistant. Streamline employee queries, leave requests, and policy information with our intelligent chatbot.</p>
+        
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-calendar-check"></i>
+                <h3>Leave Management</h3>
+                <p>Request and track leave status in real-time</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-file-invoice-dollar"></i>
+                <h3>Payroll Assistance</h3>
+                <p>Get answers to salary and payment questions</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-book"></i>
+                <h3>Policy Guidance</h3>
+                <p>Understand company policies and procedures</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-question-circle"></i>
+                <h3>HR Support</h3>
+                <p>24/7 assistance for HR-related queries</p>
+            </div>
+        </div>
+        
+        <button class="start-btn" id="startChat">
+            <i class="fas fa-comments"></i> Start Chat with HR Assistant
+        </button>
+    </div>
+
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chat-icon" id="chatIcon">
+            <img src="https://cdn-icons-png.flaticon.com/512/13330/13330989.png" alt="Chat Icon">
+        </div>
+        
+        <div class="chat-window" id="chatWindow">
+            <div class="chat-header">
+                <h3>HR Assistant</h3>
+                <div class="controls">
+                    <i class="fas fa-sync-alt" id="resetChat" title="Reset Conversation"></i>
+                    <i class="fas fa-times" id="closeChat" title="Close Chat"></i>
+                </div>
+            </div>
+            
+            <div class="messages-container" id="messagesContainer">
+                <div class="message bot-message">
+                    <p>Hello! I'm your HR Assistant. How can I help you today?</p>
+                </div>
+                <div class="message bot-message">
+                    <p>Here are some things I can help with:</p>
+                    <ul style="margin-top: 8px; padding-left: 20px;">
+                        <li>Leave requests and balances</li>
+                        <li>Payroll and salary information</li>
+                        <li>Company policies</li>
+                        <li>Employee benefits</li>
+                        <li>Onboarding assistance</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="quick-actions">
+                <button class="quick-btn" data-msg="How do I request time off?">Leave Request</button>
+                <button class="quick-btn" data-msg="What is my remaining PTO?">PTO Balance</button>
+                <button class="quick-btn" data-msg="When is payday?">Payday</button>
+                <button class="quick-btn" data-msg="What are our remote work policies?">Remote Policy</button>
+            </div>
+            
+            <div class="input-container">
+                <div class="input-wrapper">
+                    <input type="text" placeholder="Type your HR question..." class="chat-input" id="chatInput">
+                    <button class="send-button" id="sendButton">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        const chatIcon = document.getElementById('chatIcon');
+        const chatWindow = document.getElementById('chatWindow');
+        const closeChat = document.getElementById('closeChat');
+        const resetChat = document.getElementById('resetChat');
+        const messagesContainer = document.getElementById('messagesContainer');
+        const chatInput = document.getElementById('chatInput');
+        const sendButton = document.getElementById('sendButton');
+        const startChatBtn = document.getElementById('startChat');
+        const quickButtons = document.querySelectorAll('.quick-btn');
+        
+        let isOpen = false;
+        let conversationHistory = [];
+        
+        // Initialize chat
+        function initChat() {
+            // Add initial messages to conversation history
+            conversationHistory.push({
+                role: 'bot',
+                content: 'Hello! I\'m your HR Assistant. How can I help you today?'
+            });
+            
+            conversationHistory.push({
+                role: 'bot',
+                content: 'Here are some things I can help with:\n' +
+                         '- Leave requests and balances\n' +
+                         '- Payroll and salary information\n' +
+                         '- Company policies\n' +
+                         '- Employee benefits\n' +
+                         '- Onboarding assistance'
+            });
+        }
+        
+        // Toggle chat window
+        function toggleChat() {
+            isOpen = !isOpen;
+            chatWindow.classList.toggle('active');
+            chatIcon.style.display = isOpen ? 'none' : 'block';
+            
+            if (isOpen) {
+                setTimeout(() => {
+                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                    chatInput.focus();
+                }, 100);
+            }
+        }
+        
+        // Add message to chat
+        function addMessage(text, isBot) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `message ${isBot ? 'bot-message' : 'user-message'}`;
+            
+            const paragraph = document.createElement('p');
+            paragraph.textContent = text;
+            
+            messageDiv.appendChild(paragraph);
+            messagesContainer.appendChild(messageDiv);
+            
+            // Add to conversation history
+            conversationHistory.push({
+                role: isBot ? 'bot' : 'user',
+                content: text
+            });
+            
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Show typing indicator
+        function showTypingIndicator() {
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'typing-indicator';
+            typingDiv.id = 'typingIndicator';
+            
+            for (let i = 0; i < 3; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'typing-dot';
+                typingDiv.appendChild(dot);
+            }
+            
+            messagesContainer.appendChild(typingDiv);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Hide typing indicator
+        function hideTypingIndicator() {
+            const typingIndicator = document.getElementById('typingIndicator');
+            if (typingIndicator) {
+                typingIndicator.remove();
+            }
+        }
+        
+        // Simulate HRMS responses
+        function getHRMSResponse(userMessage) {
+            // Convert to lowercase for easier matching
+            const message = userMessage.toLowerCase();
+            
+            // HRMS-specific responses
+            if (message.includes('leave') || message.includes('pto') || message.includes('time off')) {
+                return "You can request time off through the HRMS portal. Navigate to 'Leave Management' > 'Request Leave'. You'll see your available PTO balance and can submit a request. Managers typically respond within 48 hours.";
+            }
+            
+            if (message.includes('balance') || message.includes('remaining') || message.includes('pto')) {
+                return "Based on our records, you have 12 days of PTO remaining this year. This includes 8 days of vacation time and 4 personal days. You can see detailed breakdown in the 'My Time Off' section of the HRMS portal.";
+            }
+            
+            if (message.includes('pay') || message.includes('salary') || message.includes('payday')) {
+                return "Paydays are every other Friday. The next payday is October 27th. Your last paycheck was $3,850 after taxes. Would you like me to email you your recent pay stub?";
+            }
+            
+            if (message.includes('policy') || message.includes('remote') || message.includes('work from home')) {
+                return "Our remote work policy allows employees to work from home up to 3 days per week with manager approval. Full remote work is available for roles designated as remote-eligible. The complete policy document is available in the 'Company Policies' section of the HRMS portal.";
+            }
+            
+            if (message.includes('benefit') || message.includes('insurance') || message.includes('health')) {
+                return "Our benefits package includes medical, dental, and vision insurance, 401(k) matching up to 5%, and wellness reimbursements. Open enrollment starts November 1st. You can view your current elections in the 'My Benefits' section.";
+            }
+            
+            if (message.includes('onboard') || message.includes('new hire') || message.includes('starting')) {
+                return "For new hires, please complete the onboarding checklist in the HRMS portal. This includes tax forms, direct deposit setup, and benefits enrollment. Your first day orientation will be at 9 AM in the main conference room. Don't forget to bring your ID for I-9 verification.";
+            }
+            
+            if (message.includes('help') || message.includes('support') || message.includes('contact')) {
+                return "For additional support, you can contact HR directly at hr@company.com or call extension 555. Our HR team is available Monday-Friday, 9 AM to 5 PM. For urgent matters outside these hours, please email hr-emergency@company.com.";
+            }
+            
+            // Default response
+            const defaultResponses = [
+                "I'm here to help with HR-related questions. Could you clarify your request?",
+                "I'm your HR assistant. How can I assist you with company policies, benefits, or employee matters?",
+                "I specialize in HR topics. Could you provide more details about your question?",
+                "I'm designed to help with HR inquiries. Please ask about leave, payroll, policies, or benefits."
+            ];
+            
+            return defaultResponses[Math.floor(Math.random() * defaultResponses.length)];
+        }
+        
+        // Handle sending messages
+        function handleSend() {
+            const inputText = chatInput.value.trim();
+            if (!inputText) return;
+            
+            // Add user message
+            addMessage(inputText, false);
+            chatInput.value = '';
+            
+            // Show typing indicator
+            showTypingIndicator();
+            
+            // Simulate API delay
+            setTimeout(() => {
+                hideTypingIndicator();
+                
+                // Get HRMS response
+                const botReply = getHRMSResponse(inputText);
+                addMessage(botReply, true);
+            }, 1000);
+        }
+        
+        // Reset conversation
+        function resetConversation() {
+            messagesContainer.innerHTML = '';
+            conversationHistory = [];
+            
+            // Add initial bot messages
+            addMessage('Hello! I\'m your HR Assistant. How can I help you today?', true);
+            addMessage('Here are some things I can help with:\n' +
+                     '- Leave requests and balances\n' +
+                     '- Payroll and salary information\n' +
+                     '- Company policies\n' +
+                     '- Employee benefits\n' +
+                     '- Onboarding assistance', true);
+        }
+        
+        // Event Listeners
+        chatbotContainer.addEventListener('click', (e) => {
+            if (e.target === chatbotContainer || e.target === chatIcon) {
+                toggleChat();
+            }
+        });
+        
+        closeChat.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleChat();
+        });
+        
+        resetChat.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetConversation();
+        });
+        
+        sendButton.addEventListener('click', handleSend);
+        
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                handleSend();
+            }
+        });
+        
+        startChatBtn.addEventListener('click', () => {
+            if (!isOpen) toggleChat();
+        });
+        
+        // Quick action buttons
+        quickButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const message = button.getAttribute('data-msg');
+                chatInput.value = message;
+                handleSend();
+            });
+        });
+        
+        // Initialize chat
+        initChat();
+    </script>
+</body>
+</html>

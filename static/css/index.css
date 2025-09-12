@@ -1,0 +1,167 @@
+:root {
+    --primary-color: #0191B4;
+    --secondary-color: #333;
+    --background-color: #FFFFFF;
+}
+
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--background-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+
+}
+
+.main-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.content-wrapper {
+    max-width: 1200px;
+    width: 100%;
+    margin: auto;
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+}
+
+.hero-section {
+    flex: 1;
+    padding: 2rem;
+}
+
+.form-section {
+    flex: 1;
+
+    padding: 2.5rem;
+    border-radius: 1rem;
+
+}
+
+#elementID {
+    color: #333333;
+    font-size: 2.8rem;
+    font-weight: 600;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    min-height: 120px;
+}
+
+.typed-cursor {
+    color: #333333;
+    font-size: 2.8rem;
+}
+
+.form-control {
+    padding: 0.8rem;
+    border: 1px solid #E0E0E0;
+    border-radius: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(1, 145, 180, 0.4);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border: none;
+    padding: 0.8rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #017a9c;
+    transform: translateY(-2px);
+}
+
+button:focus,
+button:active,
+button:focus-visible {
+
+    background-color: inherit !important;
+
+}
+
+
+
+.logo-container {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.logo-container img {
+    max-width: 300px;
+    height: auto;
+}
+
+footer {
+    background-color: var(--background-color);
+    padding: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #333333;
+    margin-top: auto;
+}
+
+@media (max-width: 992px) {
+    .content-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .hero-section,
+    .form-section {
+        width: 100%;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    #elementID {
+        font-size: 2.2rem;
+        min-height: 90px;
+    }
+
+    .typed-cursor {
+        font-size: 2.2rem;
+    }
+}
+
+@media (max-width: 576px) {
+
+
+    #elementID {
+        font-size: 1.8rem;
+        min-height: 80px;
+        margin-top: -20px;
+    }
+
+    .typed-cursor {
+        font-size: 1.8rem;
+    }
+
+    .form-section {
+        position: fixed;
+        bottom: 10%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 90%;
+        max-width: 400px;
+        z-index: 1000;
+    }
+
+    .main-container {
+        padding-bottom: 50vh;
+    }
+}

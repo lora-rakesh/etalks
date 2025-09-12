@@ -1,0 +1,1311 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
+        {% load crispy_forms_tags %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/task_management.css' %}">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="{% static 'css/base.css' %}" >
+     
+        <title>{% block title %}Dashboard{% endblock %} | AIHR4U</title>
+    </head>
+  
+    <body>
+        <div class="wrapper">
+ 
+            <!-- sidebar -->
+            <aside id="sidebar" class="js-sidebar shadow">
+               
+                <div class="h-100">
+ 
+                    <div class="sidebar-logo text-center">
+                        <a href="/dashboard"><img src="{% static 'images/lora-log.png' %}" height="auto" width="150"></a>
+                    </div>
+ 
+                    <ul class="sidebar-nav">
+ 
+                        <h6 class='text-center mt-3 pt-3'>{{user.employee_id.title}}</h6>
+                            {% block page_title %}
+                            <li class="breadcrumb-item text-center mb-3">
+                                <a href="/dashboard" class="text-decoration-none">
+                                    <small>Page</small>
+                                </a>
+                            </li>
+                            {% endblock %}
+
+                        <hr class='col-8 text-center mx-auto'>
+ 
+                        {% block sidebar %}
+                        <li class="sidebar-item">
+                            <a href="/etalks" class="sidebar-link active" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-columns-gap mx-3" viewBox="0 0 16 16">
+                                    <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/>
+                                </svg>
+                                etalks
+                            </a>
+                        </li>
+ 
+ 
+                        <li class="sidebar-item">
+                            <a href="/resignation" class="sidebar-link active" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-columns-gap mx-3" viewBox="0 0 16 16">
+                                    <path d="M6 1v3H1V1zM1 0a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1zm14 12v3h-5v-3zm-5-1a1 1 0 0 0-1 1v3a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1v-3a1 1 0 0 0-1-1zM6 8v7H1V8zM1 7a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V8a1 1 0 0 0-1-1zm14-6v7h-5V1zm-5-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h5a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1z"/>
+                                </svg>
+                                HR4U
+                            </a>
+                        </li>
+ 
+                        <li class="sidebar-item">
+                            <a href="/muster" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-stopwatch mx-3" viewBox="0 0 16 16">
+                                    <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+                                    <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+                                </svg>
+                             Muster
+                            </a>
+                        </li>
+ 
+                        <li class="sidebar-item">
+                            <a href="/salary_details" class="sidebar-link" style="color: black;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bank mx-3" viewBox="0 0 16 16">
+                                    <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+                                </svg>
+                                My Financial
+                            </a>
+                        </li>
+ 
+                        <h6 class='text-center mt-4'>Company</h6>
+                        <hr class='col-8 text-center mx-auto'>
+ 
+                        {% if request.user.is_authenticated and request.user.role == 'HR' or request.user.role == 'Manager' or request.user.is_superuser %}
+                        <li class="sidebar-item">
+                            <a href="/employee_requests" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-clipboard-data mx-3" viewBox="0 0 16 16">
+                                    <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0z"/>
+                                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                                  </svg>
+                                Employees Data
+                            </a>
+                        </li>
+ 
+                        <li class="sidebar-item">
+                            <a href="/working_days" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar2-day mx-3" viewBox="0 0 16 16">
+                                    <path d="M4.684 12.523v-2.3h2.261v-.61H4.684V7.801h2.464v-.61H4v5.332zm3.296 0h.676V9.98c0-.554.227-1.007.953-1.007.125 0 .258.004.329.015v-.613a2 2 0 0 0-.254-.02c-.582 0-.891.32-1.012.567h-.02v-.504H7.98zm2.805-5.093c0 .238.192.425.43.425a.428.428 0 1 0 0-.855.426.426 0 0 0-.43.43m.094 5.093h.672V8.418h-.672z"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+                                    <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
+                                  </svg>
+                                Working days
+                            </a>
+                        </li>
+ 
+                        {% endif %}
+                        <!--<li class="sidebar-item">
+                            <a href="/performance_list" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-graph-up mx-3" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07"/>
+                                </svg>
+                                Performance
+                            </a>
+                        </li> -->
+                        <li class="sidebar-item">
+                            <a href="/assign_task" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-clipboard-check mx-3" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd" d="M10.854 7.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                                    <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1z"/>
+                                    <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0z"/>
+                                </svg>
+                                Task Management
+                            </a>
+                        </li>
+                        {% if request.user.is_authenticated and request.user.role == 'HR' or request.user.role == 'Manager' or request.user.is_superuser %}
+                        <li class="sidebar-item">
+                            <a href="/manage_logo" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" 
+                                    class="bi bi-image mx-3" viewBox="0 0 16 16">
+                                    <path d="M14.002 3a1 1 0 0 1 1 1v8.002a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V4.002a1 1 0 0 1 1-1h12zm0-1H2a2 2 0 0 0-2 2v8.002a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4.002a2 2 0 0 0-2-2z"/>
+                                    <path d="M10.648 8.646a.5.5 0 0 1 .704.07l2.646 3.3A.5.5 0 0 1 13.6 13H2.4a.5.5 0 0 1-.398-.984l3.646-2.364 2.163 2.163a.5.5 0 0 0 .707 0l2.13-2.13z"/>
+                                    <path d="M4.502 6a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                </svg>
+                                Logo Management
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="sidebar-item">
+                            <a href="/training" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-people mx-3" viewBox="0 0 16 16">
+                                    <path d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1zm-7.978-1L7 12.996c.001-.264.167-1.03.76-1.72C8.312 10.629 9.282 10 11 10c1.717 0 2.687.63 3.24 1.276.593.69.758 1.457.76 1.72l-.008.002-.014.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4m3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0M6.936 9.28a6 6 0 0 0-1.23-.247A7 7 0 0 0 5 9c-4 0-5 3-5 4q0 1 1 1h4.216A2.24 2.24 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816M4.92 10A5.5 5.5 0 0 0 4 13H1c0-.26.164-1.03.76-1.724.545-.636 1.492-1.256 3.16-1.275ZM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0m3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4"/>
+                                </svg>
+                                Training
+                            </a>
+                        </li>
+ 
+                        <li class="sidebar-item">
+                            <a href="/policy" class="sidebar-link" style='color: black;'>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-shield-check mx-3" viewBox="0 0 16 16">
+                                    <path d="M5.338 1.59a61 61 0 0 0-2.837.856.48.48 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.7 10.7 0 0 0 2.287 2.233c.346.244.652.42.893.533q.18.085.293.118a1 1 0 0 0 .101.025 1 1 0 0 0 .1-.025q.114-.034.294-.118c.24-.113.547-.29.893-.533a10.7 10.7 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.8 11.8 0 0 1-2.517 2.453 7 7 0 0 1-1.048.625c-.28.132-.581.24-.829.24s-.548-.108-.829-.24a7 7 0 0 1-1.048-.625 11.8 11.8 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 63 63 0 0 1 5.072.56"/>
+                                    <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+                                </svg>
+                                Policies
+                            </a>
+                        </li>
+ 
+                        {% endblock %}
+ 
+                    </ul>
+ 
+                </div>
+ 
+            </aside>
+ 
+            <div class="main">
+ 
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand px-3 p-2 shadow">
+ 
+                    <!-- Toggle -->
+                    <button class="btn" id="sidebar-toggle" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+ 
+                    <!-- Search bar -->
+                    <div class="search-bar-container">
+                    <form class="d-flex mx-auto text-center ss" role="search" method="GET" action="{% url 'search_results' %}">
+                        <svg type="submit" xmlns="http://www.w3.org/2000/svg" width="18" height="20" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                        </svg>
+                        <input id="m" class="form-control form-control-sm px-5 se" type="search" name="query" placeholder="Search for a page" aria-label="Search">
+                    </form>
+                    </div>
+                    <!-- Chatbot -->
+                    <div class="chatbot-container" id="chatbotContainer">
+                        <div class="chat-icon" id="chatIcon">
+                            <img src="https://cdn-icons-png.flaticon.com/512/13330/13330989.png" alt="Chat Icon">
+                        </div>
+                    </div>
+               
+                    <div class="chat-window hidden" id="chatWindow">
+                        <div class="chat-header">
+                            <h3>Support Chat</h3>
+                            <span class="cross" id="closeChat">✕</span>
+                        </div>
+               
+                        <div class="messages-container" id="messagesContainer">
+                            <div class="message bot-message">
+                                <p>Hello! How can I help you?</p>
+                            </div>
+                        </div>
+               
+                        <div class="input-container">
+                            <div class="input-wrapper">
+                                <input type="text" placeholder="Type your message..." class="chat-input" id="chatInput">
+                                <button class="send-button" id="sendButton">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M22 2L11 13M22 2L15 22L11 13M22 2L2 9L11 13"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                     
+ 
+                    <div class="navbar-collapse navbar">
+ 
+                        <!-- Clock timer -->
+                        <div class="nav-item text-center mx-auto d-none d-md-block" style='color: black;'>
+                            <span id="liveClock"></span>
+                        </div>
+                       
+
+
+                        <ul class="navbar-nav">
+ 
+                            <div class="d-flex gap-4">
+ 
+                                <!-- ? FAQ -->
+                                <li class="nav-item dropdown d-none d-md-block help-icon-container">
+                                    <a href="#" data-bs-toggle="dropdown" style='color: black;'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                                        </svg>                                    
+                                    </a>
+                                    <div id="ques" class="dropdown-menu dropdown-menu-end pb-4" style="width: 402px;">
+                                        <div class='mx-auto text-center mt-1'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-card-text mx-1" viewBox="0 0 16 16">
+                                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                                                <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
+                                            </svg>
+                                            Quiries
+                                        </div>
+                                        <hr>
+                                        <div class="dropdown-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book mx-1" viewBox="0 0 16 16">
+                                                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                                            </svg>
+                                            <small>FAQ(Frequently Asked Questions) - </small><a href='/faq'><small>Know more</small></a>
+                                        </div>
+                                        <hr>
+                                        <div class="dropdown-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope-paper mx-1" viewBox="0 0 16 16">
+                                                <path d="M4 0a2 2 0 0 0-2 2v1.133l-.941.502A2 2 0 0 0 0 5.4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.4a2 2 0 0 0-1.059-1.765L14 3.133V2a2 2 0 0 0-2-2zm10 4.267.47.25A1 1 0 0 1 15 5.4v.817l-1 .6zm-1 3.15-3.75 2.25L8 8.917l-1.25.75L3 7.417V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm-11-.6-1-.6V5.4a1 1 0 0 1 .53-.882L2 4.267zm13 .566v5.734l-4.778-2.867zm-.035 6.88A1 1 0 0 1 14 15H2a1 1 0 0 1-.965-.738L8 10.083zM1 13.116V7.383l4.778 2.867L1 13.117Z"/>
+                                            </svg>
+                                            <small>Any other issue/quries - </small><a href='/contact_us'><small>contact us</small></a>
+                                        </div>
+                                    </div>
+                                </li>
+ 
+                             <!-- Notifications bar -->
+                                <li class="nav-item dropdown">
+ 
+                                    <a href="#" class="d-flex notification notification-bar align-items-center text-black text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-bell-fill" viewBox="0 0 16 16">
+                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+                                        </svg>
+                                        <span id="notification-count"></span>
+                                    </a>
+                                    <ul id="noti" class="dropdown-menu dropdown-menu-end text-small shadow">
+                                        {% if request.user.is_authenticated and request.user.role == 'Employee' %}
+                                            <li class='py-2 px-2' style="width: 330px; list-style: none;">
+                                                <div class='text-center d-flex justify-content-between align-items-center'>
+                                                    <span>Notifications</span>
+                                                        <form method="post" action="{% url 'clear_all_notifications' %}" style="display:inline;">
+                                                            {% csrf_token %}
+                                                            <button type="submit" title="Clear All" style="background:none; border:none; padding:0; font-size:14px; color: #333;">
+                                                                Clear All
+                                                            </button>
+                                                        </form>
+                                                </div>
+                                                <div style="max-height:350px; overflow-y:auto;">
+                                                    {% if notifications %}
+                                                        {% for notification in notifications %}
+                                                            <hr class='col-12'>
+                                                            <div class="notification" style="margin-left:10px;" data-id="{{ notification.id }}">
+                                                                <small>{{ notification.message }}</small>
+                                                            </div>
+                                                        {% endfor %}
+                                                    {% endif %}
+                                                </div>
+                                            </li>
+                                        {% endif %}   
+
+                                        {% if request.user.is_authenticated and request.user.role == 'HR' or request.user.role == 'Manager' or request.user.is_superuser %}
+                                        <li id="notif" style="width: 330px; list-style: none;">
+                                                <div class='text-center'>Pending Approvals - {{ request.user.company.name }}</div>
+                                                {% for muster in pending_musters %}
+                                                    {% if muster.user.company == request.user.company %}
+                                                        <hr class='col-12'>
+                                                        <div class="notification" style="margin-left:30px;">
+                                                            <small>
+                                                                {{ muster.user.employee_id }} has requested for 'Muster'
+                                                                <br>
+                                                                Reason : {{ muster.reason }}
+                                                                <br>
+                                                                Notes : {{ muster.notes }}
+                                                                <br>
+                                                                Requested Date : {{ muster.date|date:"F d Y" }}
+                                                                <br>↳
+                                                            </small>
+                                                            <a href="{% url 'review_muster_notifications' muster.id 'Approve' %}" class="Approve btn btn-sm"><small>Approve</small></a>
+                                                            <a href="{% url 'review_muster_notifications' muster.id 'Reject' %}" class="Reject btn btn-sm"><small>Reject</small></a>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                <!-- Repeat for leave, expense, loan as you already do -->
+                                                {% for leave in pending_leave_request %}
+                                                    {% if leave.employee.company == request.user.company %}
+                                                        <hr class='col-12'>
+                                                        <div class="notification" style="margin-left:30px;">
+                                                            <small>
+                                                                {{ leave.employee.employee_id }} has requested for 'Leave Request'
+                                                                <br>
+                                                                Type : {{ leave.leave_type }}
+                                                                <br>
+                                                                Start : {{ leave.start_date|date:"F d Y" }}
+                                                                <br>
+                                                                End : {{ leave.end_date|date:"F d Y" }}
+                                                                <br>
+                                                                Reason : {{ leave.reason }}
+                                                                <br>
+                                                                Days : {{ leave.days_requested }}
+                                                                <br>↳
+                                                            </small>
+                                                            <a href="{% url 'review_leaves_notifications' leave.id 'Approve' %}" class="Approve btn btn-sm">Approve</a>
+                                                            <a href="{% url 'review_leaves_notifications' leave.id 'Reject' %}" class="Reject btn btn-sm">Reject</a>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% for expense in pending_expense %}
+                                                    {% if expense.employee.company == request.user.company %}
+                                                        <hr class='col-12'>
+                                                        <div class="notification" style="margin-left:30px;">
+                                                            <small>
+                                                                {{ expense.employee.employee_id }} has requested for 'Expense Claim'
+                                                                <br>
+                                                                Bill No: {{ expense.bill_no }}
+                                                                <br>
+                                                                Amount: ₹{{ expense.amount }}
+                                                                <br>
+                                                                Date: {{ expense.date|date:"F d Y" }}
+                                                                <br>↳
+                                                            </small>
+                                                            <a href="{% url 'review_expense_notifications' expense.id 'Approve' %}" class="Approve btn btn-sm">Approve</a>
+                                                            <a href="{% url 'review_expense_notifications' expense.id 'Reject' %}" class="Reject btn btn-sm">Reject</a>
+                                                        </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% for loan in pending_loan %}
+                                                    {% if loan.employee.company == request.user.company %}
+                                                        <hr class='col-12'>
+                                                        <div class="notification" style="margin-left:30px;">
+                                                            <small>
+                                                                {{ loan.employee.employee_id }} has requested for 'Loan'
+                                                                <br>
+                                                                Type: {{ loan.loan_type }} – ₹{{ loan.loan_amount }}
+                                                                <br>
+                                                                Repayment: {{ loan.repayment_duration }} months @ {{ loan.interest_rate }}% PA
+                                                                <br>
+                                                                Date: {{ loan.date|date:"F d Y" }}
+                                                                <br>↳
+                                                            </small>
+                                                            <a href="{% url 'review_loan_notifications' loan.id 'Approve' %}" class="Approve btn btn-sm">Approve</a>
+                                                            <a href="{% url 'review_loan_notifications' loan.id 'Reject' %}" class="Reject btn btn-sm">Reject</a>
+                                                        </div>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                  
+                                                
+                                                    {% for resignation in pending_resignations %}
+                                                        {% if resignation.employee.company == request.user.company %}
+                                                            <hr class="col-12">
+                                                            <div class="notification" style="margin-left:30px;">
+                                                                <small>
+                                                                    {{ resignation.employee.employee_id }} has requested for 'Resignation'
+                                                                    <br>
+                                                                    Resignation Date: {{ resignation.resignation_date|date:"F d Y" }}
+                                                                    <br>
+                                                                    Last Working Day: {{ resignation.last_working_day|date:"F d Y" }}
+                                                                    <br>
+                                                                    Reason: {{ resignation.resignation_reason }}
+                                                                    {% if resignation.other_reason %}
+                                                                    <br>Other Reason: {{ resignation.other_reason }}
+                                                                    {% endif %}
+                                                                    <br>
+                                                                    Notes: {{ resignation.notes }}
+                                                                    <br>↳
+                                                                </small>
+                                                                <a href="{% url 'review_resignation_request' resignation.id 'Approve' %}" class="Approve btn btn-sm"><small>Approve</small></a>
+                                                                <a href="{% url 'review_resignation_request' resignation.id 'Reject' %}" class="Reject btn btn-sm"><small>Reject</small></a>
+                                                            </div>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                {% endif %}
+                                            </ul>
+                                        </li>
+                                        
+                                <!-- Profile section -->
+                                <!-- Profile section -->
+                                <li id="profileDropdownItem" class="nav-item dropdown">
+                                    <a href="#" data-bs-toggle="dropdown" id="profileDropdownButton" style='color: black;'>
+                                        <img width="28" height="28"
+                                            src="{% if user.employee.media.profile_picture %}
+                                                    {{ user.employee.media.profile_picture.url }}
+                                                {% else %}
+                                                    {% static 'person-circle.svg' %}
+                                                {% endif %}"
+                                            alt="Profile Picture"
+                                             id="profileImage"
+                                             class="profile-icon"
+                                             loading="lazy">
+                                    </a>
+                                <div id="profileDropdownMenu" class="dropdown-menu dropdown-menu-light dropdown-menu-end text-center" style="width: 250px;">
+                                    <a href="/profile" id="profileGreeting" class="dropdown-item">
+                                        <i class="fas fa-user-circle me-2"></i>
+                                        Hello, {{ user.employee.first_name }}!
+                                    </a>
+                                    <hr id="divider1" class="dropdown-divider">
+                                    <a href="/profile" id="profileLink" class="dropdown-item">
+                                        <i class="fas fa-user-cog me-2"></i>
+                                        Profile
+                                    </a>
+                                    <hr id="divider2" class="dropdown-divider">
+                                    <form method="POST" action="{% url 'logout' %}" class="dropdown-item">
+                                        {% csrf_token %}
+                                        <button class="btn btn-link p-0 text-decoration-none" type="submit">
+                                            <i class="fas fa-sign-out-alt me-2"></i>
+                                            Logout
+                                        </button>
+                                    </form>
+                                </div>
+                            </li>
+
+                            </div>
+
+                        </ul>
+
+                    </div>
+
+                </nav>
+
+                <!-- Main content -->
+                <main class="container-fluid">
+
+                    {% block content %}
+                    {% endblock %}
+                    
+                </main>
+
+            </div>
+
+        </div>
+
+    
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <!----  Clock-in / Clock-out ---->
+        {% comment %} <script>
+            function getLocationAndSubmitClockIn() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        document.getElementById('latitude').value = position.coords.latitude;
+                        document.getElementById('longitude').value = position.coords.longitude;
+                        document.getElementById('clock-in-form').submit();
+                    });
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+    
+            function getLocationAndSubmitClockOut() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        document.getElementById('clock-out-latitude').value = position.coords.latitude;
+                        document.getElementById('clock-out-longitude').value = position.coords.longitude;
+                        document.getElementById('clock-out-form').submit();
+                    });
+                } else {
+                    alert("Geolocation is not supported by this browser.");
+                }
+            }
+    
+            const clockInTime = "{{ user.timeentry_set.first.clock_in_time|default:'' }}";
+            const clockOutButton = document.getElementById('clock-out-button');
+            if (clockInTime) {
+                const clockInDate = new Date(clockInTime);
+                const currentTime = new Date();
+                const timeDifference = (currentTime - clockInDate) / (1000 * 60 * 60);
+                if (timeDifference < 9) {
+                    clockOutButton.disabled = true;
+                }
+            }
+
+        </script> {% endcomment %}
+
+        <script>
+
+            function getLocationAndSubmitClockIn() {
+        
+                if (navigator.geolocation) {
+        
+                    navigator.geolocation.getCurrentPosition(function(position) {
+        
+                        const latitudeField = document.getElementById('latitude');
+        
+                        const longitudeField = document.getElementById('longitude');
+        
+                        const form = document.getElementById('clock-in-form');
+         
+                        if (latitudeField && longitudeField && form) {
+        
+                            latitudeField.value = position.coords.latitude;
+        
+                            longitudeField.value = position.coords.longitude;
+        
+                            form.submit();
+        
+                        } else {
+        
+                            console.error("Clock-in form or fields not found!");
+        
+                        }
+        
+                    });
+        
+                } else {
+        
+                    alert("Geolocation is not supported by this browser.");
+        
+                }
+        
+            }
+         
+            function getLocationAndSubmitClockOut() {
+        
+                if (navigator.geolocation) {
+        
+                    navigator.geolocation.getCurrentPosition(function(position) {
+        
+                        const latField = document.getElementById('clock-out-latitude');
+        
+                        const longField = document.getElementById('clock-out-longitude');
+        
+                        const form = document.getElementById('clock-out-form');
+         
+                        if (latField && longField && form) {
+        
+                            latField.value = position.coords.latitude;
+        
+                            longField.value = position.coords.longitude;
+        
+                            form.submit();
+        
+                        } else {
+        
+                            console.error("Clock-out form or fields not found!");
+        
+                        }
+        
+                    });
+        
+                } else {
+        
+                    alert("Geolocation is not supported by this browser.");
+        
+                }
+        
+            }
+         
+            let clockInTime = "{{ user.timeentry_set.first.clock_in_time|default:'' }}".trim();
+        
+            const clockOutButton = document.getElementById('clock-out-button');
+         
+            if (clockOutButton && clockInTime) { 
+        
+                const clockInDate = new Date(clockInTime);
+        
+                if (!isNaN(clockInDate)) {  // Ensure it's a valid date
+        
+                    const currentTime = new Date();
+        
+                    const timeDifference = (currentTime - clockInDate) / (1000 * 60 * 60);
+        
+                    if (timeDifference < 9) {
+        
+                        clockOutButton.disabled = true;
+        
+                    }
+        
+                }
+        
+            }
+        </script>
+        
+        <!----  Side-toggle ---->
+        <script>
+            const sidebarToggle = document.querySelector("#sidebar-toggle");
+            sidebarToggle.addEventListener("click",function(){
+                document.querySelector("#sidebar").classList.toggle("collapsed");
+            });
+        </script>
+
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+        
+        <!----  Clock ---->
+        <script>
+            function updateClock() {
+                var now = new Date();
+                var day = now.toLocaleString('en-us', { weekday: 'long' });
+                var date = now.getDate();
+                var month = now.toLocaleString('en-us', { month: 'long' });
+                var year = now.getFullYear();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                var timeString = date + ' - ' + month + ' - ' + year + ' , ' + day + ' , ' + hours + ' : ' + minutes + ' : ' + seconds + ' ' + ampm;
+    
+                document.getElementById('liveClock').textContent = timeString;
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock();
+        </script>
+        
+        <!----  Notifications ---->
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let countDisplay = document.getElementById("notification-count");
+            
+                function updateCount() {
+                    // Select only the notification items, not the container or other elements
+                    let notifications = document.querySelectorAll("#noti .notification");
+                    let notificationCount = notifications.length;
+            
+                    if (notificationCount > 0) {
+                        countDisplay.textContent = notificationCount;
+                        countDisplay.style.visibility = "visible";
+                    } else {
+                        countDisplay.textContent = "0";  // Explicitly set to 0
+                        countDisplay.style.visibility = "hidden";  // Hide badge when no notifications
+                    }
+                }
+            
+                // Handle approve/reject button clicks
+                document.querySelectorAll(".approve, .reject").forEach(button => {
+                    button.addEventListener("click", function () {
+                        let notification = this.closest(".notification");
+                        notification.style.opacity = "0";
+                        setTimeout(() => {
+                            notification.remove();
+                            updateCount();
+                        }, 300);
+                    });
+                });
+            
+                // Initial count update
+                updateCount();
+            });
+        </script>
+        
+        <!----  Task Management ---->
+        <script>
+            document.addEventListener("DOMContentLoaded", () => {
+                const assignTaskBtn = document.getElementById("assignTaskBtn");
+                const myTaskBtn = document.getElementById("myTaskBtn");
+                const assignTaskInterface = document.getElementById("assignTaskInterface");
+                const myTaskInterface = document.getElementById("myTaskInterface");
+                const assignTaskForm = document.getElementById("assignTaskForm");
+                
+                const currentMonthYear = document.getElementById("currentMonthYear");
+                const calendar = document.getElementById("calendar");
+                const prevMonth = document.getElementById("prevMonth");
+                const nextMonth = document.getElementById("nextMonth");
+                
+                const modal = document.createElement("div");
+                modal.classList.add("modal");
+                document.body.appendChild(modal);
+                
+                let today = new Date();
+                let currentMonth = today.getMonth();
+                let currentYear = today.getFullYear();
+                
+                const fetchTasksForDate = async (date) => {
+                    try {
+                        const response = await fetch(`/tasks-by-date/?date=${date}`);
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        const data = await response.json();
+                        return data.tasks;
+                    } catch (error) {
+                        console.error("Error fetching tasks:", error);
+                        return [];
+                    }
+                };
+                
+                const fetchMyTasks = async () => {
+                    try {
+                        const response = await fetch('/my-tasks/');
+                        
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+    
+                        const data = await response.json();  // Expecting JSON response
+                        return data.tasks;
+    
+                    } catch (error) {
+                        console.error("Error fetching tasks:", error);
+                        return [];
+                    }
+                };
+    
+                const markTaskComplete = async (taskId) => {
+                    const response = await fetch(`/mark-task-complete/${taskId}/`, { method: "POST" });
+                    const data = await response.json();
+                    return data.status === "success";
+                };
+                
+                const renderTasksModal = (date, tasks) => {
+                    modal.innerHTML = `
+                        <div class="modal-header">
+                            <h4>Tasks for ${date}</h4>
+                            <button class="modal-close">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            ${tasks.length > 0
+                                ? tasks.map((task) => {
+                                    if (task.completed) {
+                                        // If the task is completed, show the "Task Completed!" message
+                                        return `<div class="task-item" data-task-id="${task.id}">
+                                                    <strong>Task Name :  ${task.name}</strong><br>Assigned To :  ${task.assigned_to.join(", ")}
+                                                    <div class="task-completed-message" style="display: block;">Task Completed!</div>
+                                                </div><hr>`;
+                                    } else {
+                                        // Otherwise, show the radio button and submit button to mark as completed
+                                        return `<div class="task-item" data-task-id="${task.id}">
+                                                    <strong>Task Name :  ${task.name}</strong><br>Assigned To :  ${task.assigned_to.join(", ")}
+                                                    <div class="task-pending-message">
+                                                        <label>
+                                                            <input type="radio" name="taskComplete" data-task-id="${task.id}" />
+                                                            Mark as Completed 
+                                                        </label>
+                                                        <button class="submit-btn" data-task-id="${task.id}">Submit</button>
+                                                    </div>
+                                                </div><hr>`;
+                                    }
+                                }).join("")
+                                : "<p>No tasks assigned for this date.</p>"
+                            }
+                        </div>
+                    `;
+                    modal.classList.add("active");
+    
+                    // Add event listener for Submit button to mark task as completed
+                    modal.querySelectorAll('.submit-btn').forEach((button) => {
+                        button.addEventListener("click", async (e) => {
+                            const taskId = e.target.dataset.taskId;
+                            const success = await markTaskComplete(taskId);
+                            if (success) {
+                                // Hide the entire pending message section (radio + submit button)
+                                const taskDiv = e.target.closest('.task-item');
+                                taskDiv.querySelector('.task-pending-message').style.display = "none";  // Hide the "Mark as Completed" and "Submit" button
+                                const completedMessage = taskDiv.querySelector('.task-completed-message');
+                                completedMessage.style.display = "block";  // Show the Task Completed message
+    
+                                renderCalendar(currentMonth, currentYear);  // Refresh the calendar
+                            } else {
+                                alert("Error completing task.");
+                            }
+                        });
+                    });
+    
+                    modal.querySelector(".modal-close").addEventListener("click", () => modal.classList.remove("active"));
+                };
+    
+                const renderCalendar = (month, year) => {
+                    calendar.innerHTML = "";
+                    const firstDay = new Date(year, month).getDay();
+                    const daysInMonth = new Date(year, month + 1, 0).getDate();
+                    currentMonthYear.textContent = `${month + 1}/${year}`;
+    
+                    const today = new Date();
+                    const currentFullDate = `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, "0")}-${String(today.getDate()).padStart(2, "0")}`;
+    
+                    // Loop through all the days of the month
+                    for (let i = 0; i < firstDay; i++) {
+                        calendar.appendChild(document.createElement("div"));
+                    }
+    
+                    for (let day = 1; day <= daysInMonth; day++) {
+                        const dateCell = document.createElement("div");
+                        const fullDate = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+                        dateCell.textContent = day;
+    
+                        // Set the default state of the date cell
+                        if (fullDate === currentFullDate) {
+                            dateCell.classList.add("current-date");
+                            dateCell.innerHTML = `${day} 🔓`;
+                        } else if (new Date(fullDate) < today) {
+                            dateCell.classList.add("past-date");
+                            dateCell.innerHTML = `${day} 🔓`;
+                        } else {
+                            dateCell.innerHTML = `${day} 🔒`;
+                        }
+    
+                        // Check if all tasks for this date are completed
+                        fetchTasksForDate(fullDate).then((tasks) => {
+                            // If tasks exist for this date
+                            if (tasks.length > 0) {
+                                // Check if all tasks are completed
+                                const allTasksCompleted = tasks.every(task => task.completed);
+    
+                                // If all tasks are completed, add the 'completed-day' class
+                                if (allTasksCompleted) {
+                                    dateCell.classList.add("completed-day");
+                                } else {
+                                    // Otherwise, ensure the class is removed if tasks are not completed
+                                    dateCell.classList.remove("completed-day");
+                                }
+    
+                                // Add click functionality if there are tasks for this date
+                                if (new Date(fullDate) <= today) {
+                                    dateCell.classList.add("task-date");
+                                    dateCell.addEventListener("click", () => renderTasksModal(fullDate, tasks));
+                                }
+                            } else {
+                                // Handle case when no tasks are assigned for the date
+                                dateCell.classList.remove("completed-day"); // Remove completed class if no tasks
+                                dateCell.classList.remove("task-date"); // Remove task date class (if previously added)
+                                dateCell.title = "No tasks for this date"; // Optionally, add a tooltip to indicate no tasks
+                            }
+                        });
+    
+    
+                        calendar.appendChild(dateCell);
+                    }
+                };
+    
+    
+                prevMonth.addEventListener("click", () => {
+                    currentMonth -= 1;
+                    if (currentMonth < 0) {
+                        currentMonth = 11;
+                        currentYear -= 1;
+                    }
+                    renderCalendar(currentMonth, currentYear);
+                });
+    
+                nextMonth.addEventListener("click", () => {
+                    currentMonth += 1;
+                    if (currentMonth > 11) {
+                        currentMonth = 0;
+                        currentYear += 1;
+                    }
+                    renderCalendar(currentMonth, currentYear);
+                });
+    
+                assignTaskBtn.addEventListener("click", () => {
+                    assignTaskInterface.classList.add("active");
+                    myTaskInterface.classList.remove("active");
+                });
+    
+                myTaskBtn.addEventListener("click", () => {
+                    myTaskInterface.classList.add("active");
+                    assignTaskInterface.classList.remove("active");
+                    fetchMyTasks().then((tasks) => {
+                        renderCalendar(currentMonth, currentYear, tasks); // Update the calendar with the fetched tasks
+                    });
+                });
+    
+                assignTaskForm.addEventListener("submit", async (e) => {
+                    e.preventDefault();
+                    const formData = new FormData(assignTaskForm);
+                    const response = await fetch("/assign-task/", { method: "POST", body: formData });
+                    const data = await response.json();
+                    if (data.status === "success") {
+                         // Show the custom success alert box
+                        const successAlert = document.getElementById("successAlert");
+                        successAlert.classList.add("show"); // Add 'show' class to display the alert
+    
+                        // Optionally, hide the alert after 3 seconds
+                        setTimeout(() => {
+                            successAlert.classList.remove("show"); // Hide the alert box after 3 seconds
+                        }, 2000);
+    
+                        // You can remove this alert if you don't need it anymore:
+                        // alert("Task assigned successfully!");  
+                    }
+                    assignTaskForm.reset();
+                });
+                
+    
+                renderCalendar(currentMonth, currentYear); // Initial render of the calendar
+            });
+        </script>
+
+        <!----  Profile Section ---->
+      <script>
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // ✅ Show "personal-info" section on initial load
+        showSection('personal-info');
+
+        // ✅ Open profile modal
+        const profileIcon = document.querySelector('.edit-profile-icon');
+        if (profileIcon) {
+            profileIcon.addEventListener('click', function () {
+                const modal = document.getElementById('uploadModal');
+                if (modal) modal.style.display = 'block';
+            });
+        }
+
+        // ✅ Open cover modal
+        const coverIcon = document.querySelector('.edit-cover-icon');
+        if (coverIcon) {
+            coverIcon.addEventListener('click', function () {
+                const modal = document.getElementById('coverUploadModal');
+                if (modal) modal.style.display = 'block';
+            });
+        }
+
+        // ✅ Close profile modal
+        const closeProfileModal = document.getElementById('closeModal');
+        if (closeProfileModal) {
+            closeProfileModal.addEventListener('click', function () {
+                const modal = document.getElementById('uploadModal');
+                if (modal) modal.style.display = 'none';
+            });
+        }
+
+        // ✅ Close cover modal
+        const closeCoverModal = document.getElementById('closeCoverModal');
+        if (closeCoverModal) {
+            closeCoverModal.addEventListener('click', function () {
+                const modal = document.getElementById('coverUploadModal');
+                if (modal) modal.style.display = 'none';
+            });
+        }
+
+        // ✅ Handle profile picture AJAX upload
+        const profileForm = document.getElementById('profilePictureForm');
+        if (profileForm) {
+            profileForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                fetch("{% url 'edit_profile_picture' %}", {
+                    method: "POST",
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.querySelector('.profile-picture').src = data.new_picture_url;
+                        document.getElementById('uploadModal').style.display = 'none';
+                    } else {
+                        alert("Error: The profile picture could not be uploaded.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error uploading profile picture:", error);
+                });
+            });
+        }
+
+        // ✅ Handle cover picture AJAX upload
+        const coverForm = document.getElementById('coverPictureForm');
+        if (coverForm) {
+            coverForm.addEventListener('submit', function (e) {
+                e.preventDefault();
+                const formData = new FormData(this);
+                fetch("{% url 'edit_cover_picture' %}", {
+                    method: "POST",
+                    headers: {
+                        'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    },
+                    body: formData
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        document.querySelector('.cover-photo img').src = data.new_cover_picture_url;
+                        document.getElementById('coverUploadModal').style.display = 'none';
+                    } else {
+                        alert("Error: The cover picture could not be uploaded.");
+                    }
+                })
+                .catch(error => {
+                    console.error("Error uploading cover picture:", error);
+                });
+            });
+        }
+
+        // ✅ Function to show only selected section
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.info-section');
+            sections.forEach(section => section.style.display = 'none');
+
+            const sectionToShow = document.getElementById(sectionId);
+            if (sectionToShow) {
+                sectionToShow.style.display = 'block';
+            }
+        }
+
+    });
+</script>
+
+
+        <!----  Chat Bot ---->
+<script>
+    // Element selectors
+    const chatbotContainer = document.getElementById('chatbotContainer');
+    const chatIcon = document.getElementById('chatIcon');
+    const chatWindow = document.getElementById('chatWindow');
+    const closeChat = document.getElementById('closeChat');
+    const resetChat = document.getElementById('resetChat');
+    const messagesContainer = document.getElementById('messagesContainer');
+    const chatInput = document.getElementById('chatInput');
+    const sendButton = document.getElementById('sendButton');
+    const quickButtons = document.querySelectorAll('.quick-btn');
+
+    let isOpen = false;
+    let conversationHistory = [];
+
+    // Start chat with welcome messages
+    function initChat() {
+        conversationHistory = [];
+        addMessage("Hello! I'm your HR Assistant. How can I help you today?", true);
+        addMessage("Here are some things I can help with:\n- Leave requests and balances\n- Payroll and salary information\n- Company policies\n- Employee benefits\n- Onboarding assistance", true);
+    }
+
+    function toggleChat() {
+        isOpen = !isOpen;
+        chatWindow.classList.toggle('hidden');
+        chatIcon.style.display = isOpen ? 'none' : 'block';
+
+        if (isOpen) {
+            setTimeout(() => {
+                messagesContainer.scrollTop = messagesContainer.scrollHeight;
+                chatInput.focus();
+            }, 100);
+        }
+    }
+
+    function addMessage(text, isBot) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${isBot ? 'bot-message' : 'user-message'}`;
+
+        const paragraph = document.createElement('p');
+        paragraph.textContent = text;
+        messageDiv.appendChild(paragraph);
+
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+
+        conversationHistory.push({ role: isBot ? 'bot' : 'user', content: text });
+    }
+
+    function showTypingIndicator() {
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.id = 'typingIndicator';
+
+        for (let i = 0; i < 3; i++) {
+            const dot = document.createElement('div');
+            dot.className = 'typing-dot';
+            typingDiv.appendChild(dot);
+        }
+
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function hideTypingIndicator() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) {
+            typingIndicator.remove();
+        }
+    }
+
+    function getHRMSResponse(userMessage) {
+        const message = userMessage.toLowerCase();
+
+        if (message.includes('leave') || message.includes('pto') || message.includes('time off')) {
+            return "You can request time off through the HRMS portal. Go to 'Leave Management' > 'Request Leave'.";
+        }
+        if (message.includes('balance') || message.includes('remaining')) {
+            return "You have 12 days of PTO remaining this year.";
+        }
+        if (message.includes('pay') || message.includes('salary') || message.includes('payday')) {
+            return "Your last paycheck was credited on the 27th. The next payday is in two weeks.";
+        }
+        if (message.includes('policy') || message.includes('remote') || message.includes('work from home')) {
+            return "You can work remotely up to 3 days a week with manager approval.";
+        }
+        if (message.includes('benefit') || message.includes('insurance') || message.includes('health')) {
+            return "We offer medical, dental, vision, and 401(k) matching benefits.";
+        }
+        if (message.includes('onboard') || message.includes('new hire')) {
+            return "Please complete the onboarding checklist in your HRMS dashboard.";
+        }
+        if (message.includes('help') || message.includes('support') || message.includes('contact')) {
+            return "You can contact HR at hr@company.com or call extension 555.";
+        }
+        if (message.includes('thank you') || message.includes('thanks')) {
+            return "You're welcome! If you have any other questions, feel free to ask.";
+        }
+        if (message.includes('hi') || message.includes('hello') || message.includes('hey')) {
+            return "Hello! How can I assist you today?";
+        }
+        if (message.includes('goodbye') || message.includes('bye')) {
+            return "Goodbye! Have a great day!";
+        }
+
+        const defaultReplies = [
+            "Could you clarify your request?",
+            "Please ask about leave, payroll, benefits, or policies.",
+            "I'm your HR assistant. Try asking about PTO or payroll.",
+            "I'm here to help! Ask me about HR topics."
+        ];
+
+        return defaultReplies[Math.floor(Math.random() * defaultReplies.length)];
+    }
+
+    function handleSend() {
+        const inputText = chatInput.value.trim();
+        if (!inputText) return;
+
+        addMessage(inputText, false);
+        chatInput.value = '';
+        showTypingIndicator();
+
+        setTimeout(() => {
+            hideTypingIndicator();
+            const reply = getHRMSResponse(inputText);
+            addMessage(reply, true);
+        }, 800);
+    }
+
+    function resetConversation() {
+        messagesContainer.innerHTML = '';
+        initChat();
+    }
+
+    // Event Listeners
+    chatbotContainer.addEventListener('click', (e) => {
+        if (e.target === chatbotContainer || e.target === chatIcon) {
+            toggleChat();
+        }
+    });
+
+    closeChat.addEventListener('click', (e) => {
+        e.stopPropagation();
+        toggleChat();
+    });
+
+    if (resetChat) {
+        resetChat.addEventListener('click', (e) => {
+            e.stopPropagation();
+            resetConversation();
+        });
+    }
+
+    sendButton.addEventListener('click', handleSend);
+
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSend();
+        }
+    });
+
+    quickButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const msg = button.getAttribute('data-msg');
+            chatInput.value = msg;
+            handleSend();
+        });
+    });
+
+    // Initialize on load
+    initChat();
+</script>
+
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                function handleImageUpload(imageId) {
+                    const input = document.createElement("input");
+                    input.type = "file";
+                    input.accept = "image/*";
+                    input.addEventListener("change", function () {
+                        const file = this.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function (e) {
+                                const imageElement = document.getElementById(imageId);
+                                if (imageElement) {
+                                    
+                                    imageElement.src = e.target.result;
+                                    console.log(`${imageId} updated successfully.`);
+        
+                                    
+                                    localStorage.setItem(imageId, e.target.result);
+                                } else {
+                                    console.error(`Element with ID ${imageId} not found.`);
+                                }
+                            };
+                            reader.readAsDataURL(file);
+                        } else {
+                            console.warn("No file selected.");
+                        }
+                    });
+                    input.click();
+                }
+        
+                
+                function loadSavedImages() {
+                    const coverImage = document.getElementById("cover-image");
+                    const profileImage = document.getElementById("profile-image");
+        
+                    if (coverImage && localStorage.getItem("cover-image")) {
+                        coverImage.src = localStorage.getItem("cover-image");
+                    }
+                    if (profileImage && localStorage.getItem("profile-image")) {
+                        profileImage.src = localStorage.getItem("profile-image");
+                    }
+                }
+        
+                
+                loadSavedImages();
+        
+                
+                const coverBtn = document.getElementById("edit-cover-btn");
+                if (coverBtn) {
+                    coverBtn.addEventListener("click", function () {
+                        handleImageUpload("cover-image");
+                    });
+                } else {
+                    console.error("Cover edit button not found.");
+                }
+        
+                const profileBtn = document.getElementById("edit-profile-btn");
+                if (profileBtn) {
+                    profileBtn.addEventListener("click", function () {
+                        handleImageUpload("profile-image");
+                    });
+                } else {
+                    console.error("Profile edit button not found.");
+                }
+            });
+        </script>     
+        
+       <script>
+let inactivityTime = function () {
+    let timer;
+    const logoutUrl = "{% url 'index' %}"; // Or real logout view
+
+    function resetTimer() {
+        clearTimeout(timer);
+        timer = setTimeout(() => {
+            alert("You've been logged out due to inactivity.");
+            window.location.href = logoutUrl;
+        }, 5 * 60 * 1000); // 5 minutes
+    }
+
+    function setupEvents() {
+        window.addEventListener("load", resetTimer);
+        document.addEventListener("mousemove", resetTimer);
+        document.addEventListener("keydown", resetTimer);
+        document.addEventListener("click", resetTimer);
+        document.addEventListener("scroll", resetTimer);
+        document.addEventListener("touchstart", resetTimer); // mobile tap
+    }
+
+    setupEvents();
+};
+
+inactivityTime();
+</script>
+
+
+
+    </body>
+
+</html>

@@ -1,0 +1,530 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Resignation Request</small>
+    </a>
+</li>
+{% endblock %}
+
+{% block sidebar %}
+<link rel="stylesheet" href="{% static 'css/resignation.css' %}">
+
+
+<li class="sidebar-item">
+    <a href="/resignation" class="sidebar-link tablink" style="color: black;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-box-arrow-right mx-3" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-6a1.5 1.5 0 0 1-1.5-1.5v-9A1.5 1.5 0 0 1 3.5 1h6a.5.5 0 0 1 0 1h-6A.5.5 0 0 0 3 2.5v9a.5.5 0 0 0 .5.5h6a.5.5 0 0 1 .5.5z"/>
+            <path fill-rule="evenodd" d="M14.354 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L13.293 7.5H6.5a.5.5 0 0 0 0 1h6.793l-2.647 2.646a.5.5 0 0 0 .708.708l3-3z"/>
+        </svg>
+        Resignation Request
+    </a>
+</li>
+
+<!-- Employee Self Service -->
+<li class="sidebar-item">
+    <a href="/employee_self_service" class="sidebar-link tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-stopwatch mx-3" viewBox="0 0 16 16">
+            <path d="M8.5 5.6a.5.5 0 1 0-1 0v2.9h-3a.5.5 0 0 0 0 1H8a.5.5 0 0 0 .5-.5z"/>
+            <path d="M6.5 1A.5.5 0 0 1 7 .5h2a.5.5 0 0 1 0 1v.57c1.36.196 2.594.78 3.584 1.64l.012-.013.354-.354-.354-.353a.5.5 0 0 1 .707-.708l1.414 1.415a.5.5 0 1 1-.707.707l-.353-.354-.354.354-.013.012A7 7 0 1 1 7 2.071V1.5a.5.5 0 0 1-.5-.5M8 3a6 6 0 1 0 .001 12A6 6 0 0 0 8 3"/>
+        </svg>
+        Employee Self Service
+    </a>
+</li>
+
+<!-- HR Services (Conditional) -->
+{% if request.user.is_authenticated and request.user.role in 'Manager,HR' %}
+<li class="sidebar-item">
+    <a href="/hr_services" class="sidebar-link tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar2-check mx-3" viewBox="0 0 16 16">
+            <path d="M10.854 8.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 0 1 .708-.708L7.5 10.793l2.646-2.647a.5.5 0 0 1 .708 0"/>
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        HR Contact
+    </a>
+</li>
+{% endif %}
+
+<!-- Career Development -->
+<li class="sidebar-item">
+    <a href="/career_development" class="sidebar-link tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-calendar2-week mx-3" viewBox="0 0 16 16">
+            <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M2 2a1 1 0 0 0-1 1v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1z"/>
+            <path d="M2.5 4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5zM11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm-5 3a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+        Career Development
+    </a>
+</li>
+
+<!-- Help Desk -->
+<li class="sidebar-item">
+    <a href="/help_desk" class="sidebar-link tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-x-diamond mx-3" viewBox="0 0 16 16">
+            <path d="M7.987 16a1.53 1.53 0 0 1-1.07-.448L.45 9.082a1.53 1.53 0 0 1 0-2.165L6.917.45a1.53 1.53 0 0 1 2.166 0l6.469 6.468A1.53 1.53 0 0 1 16 8.013a1.53 1.53 0 0 1-.448 1.07l-6.47 6.469A1.53 1.53 0 0 1 7.988 16zM7.639 1.17 4.766 4.044 8 7.278l3.234-3.234L8.361 1.17a.51.51 0 0 0-.722 0M8.722 8l3.234 3.234 2.873-2.873c.2-.2.2-.523 0-.722l-2.873-2.873zM8 8.722l-3.234 3.234 2.873 2.873c.2.2.523.2.722 0l2.873-2.873zM7.278 8 4.044 4.766 1.17 7.639a.51.51 0 0 0 0 .722l2.874 2.873z"/>
+        </svg>
+        Help Desk
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <div class="mt-2">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+<div class="resignation-container">
+    <div class="resignation-header">
+        <h1 class="header-title">Resignation Request</h1>
+        <p class="header-subtitle">Submit your formal resignation through AIHR4U</p>
+    </div>
+    
+    <div class="progress-container">
+        <div class="progress-bar" id="form-progress"></div>
+    </div>
+    
+    <form class="resignation-form" id="resignationForm" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        
+        <!-- Employee Information Section -->
+        <div class="mb-5">
+            <h3 class="section-title">Employee Information</h3>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label for="employeeName" class="form-label">Full Name</label>
+                    <input type="text" class="form-control" id="employeeName" value="{{ request.user.first_name }} {{ request.user.last_name }}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="employeeId" class="form-label">Employee ID</label>
+                    <input type="text" class="form-control" id="employeeId" value="{{ request.user.employee_id }}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="department" class="form-label">Department</label>
+                    <input type="text" class="form-control" id="department" value="{{ request.user.employee.department }}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="position" class="form-label">Position</label>
+                    <input type="text" class="form-control" id="position" value="{{ request.user.role }}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="hireDate" class="form-label">Hire Date</label>
+                    <input type="text" class="form-control" id="hireDate" value="{{ request.user.date_joined|date:'F d, Y' }}" readonly>
+                </div>
+                <div class="col-md-6">
+                    <label for="manager" class="form-label">Reporting Manager</label>
+                    <input type="text" class="form-control" id="manager" value="{{ request.user.employee.reporting_manager }}" readonly>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Resignation Details Section -->
+        <div class="mb-5">
+            <h3 class="section-title">Resignation Details</h3>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <label for="resignationDate" class="form-label">Resignation Date</label>
+                    <input type="date" class="form-control" id="resignationDate" name="resignation_date" value="{{ resignation_date|date:'Y-m-d' }}" required>
+                </div>
+                <div class="col-md-6">
+                    <label for="lastWorkingDay" class="form-label">Last Working Day</label>
+                    <input type="date" class="form-control" id="lastWorkingDay" name="last_working_day" value="{{ last_working_day|date:'Y-m-d' }}" required>
+                </div>
+                <div class="col-12">
+    <label class="form-label">Reason for Resignation</label>
+    <div class="reason-buttons mt-2">
+        <div class="reason-option" data-value="Better Career Opportunity">Better Career Opportunity</div>
+        <div class="reason-option" data-value="Relocation">Relocation</div>
+        <div class="reason-option" data-value="Health Reasons">Health Reasons</div>
+        <div class="reason-option" data-value="Personal Reasons">Personal Reasons</div>
+        <div class="reason-option" data-value="Further Education">Further Education</div>
+        <div class="reason-option" data-value="Other">Other</div>
+    </div>
+
+    <input type="hidden" id="resignationReason" name="resignation_reason" required>
+
+    <div class="mt-3" id="otherReasonContainer" style="display: none;">
+        <label for="otherReason" class="form-label">Please specify</label>
+        <input type="text" class="form-control" id="otherReason" name="other_reason" placeholder="Enter your reason">
+    </div>
+</div>
+        </div>
+        
+        <!-- Attachments Section -->
+        <div class="mb-5">
+            <h3 class="section-title">Attachments</h3>
+            <div class="row g-4">
+                <div class="col-12">
+                    <div class="file-upload" id="fileUploadArea">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h5>Upload Resignation Letter (Optional)</h5>
+                        <p class="text-muted">Drag & drop your file here or click to browse</p>
+                        <input type="file" id="resignationLetter" name="resignation_letter" class="d-none" accept=".pdf,.doc,.docx">
+                    </div>
+                    <div id="filePreview" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Signature Section -->
+        <div class="mb-5">
+            <h3 class="section-title">Signature</h3>
+            <div class="row g-4">
+                <div class="col-12">
+                    <label class="form-label">Electronic Signature</label>
+                    <div class="signature-container">
+                        <canvas id="signature-pad"></canvas>
+                    </div>
+                    <div class="signature-actions">
+                        <button type="button" id="clear-signature" class="btn btn-outline-secondary btn-action">
+                            <i class="fas fa-eraser me-2"></i>Clear Signature
+                        </button>
+                        <button type="button" id="save-signature" class="btn btn-outline-primary btn-action">
+                            <i class="fas fa-save me-2"></i>Save Signature
+                        </button>
+                    </div>
+                    <input type="hidden" id="signatureData" name="signature_data">
+                </div>
+                <div class="col-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="agreement" name="agreement" required>
+                        <label class="form-check-label" for="agreement">
+                            I hereby declare that the information provided is true and correct to the best of my knowledge. I understand that submitting this resignation initiates the offboarding process.
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Preview Section -->
+        <div class="preview-container">
+            <h5 class="preview-title">Resignation Preview</h5>
+            <div class="preview-item">
+                <span class="preview-label">Employee:</span>
+                <span id="preview-name">{{ request.user.first_name }} {{ request.user.last_name }}</span>
+            </div>
+            <div class="preview-item">
+                <span class="preview-label">Resignation Date:</span>
+                <span id="preview-resign-date">Not set</span>
+            </div>
+            <div class="preview-item">
+                <span class="preview-label">Last Working Day:</span>
+                <span id="preview-last-day">Not set</span>
+            </div>
+            <div class="preview-item">
+                <span class="preview-label">Reason:</span>
+                <span id="preview-reason">Not set</span>
+            </div>
+            <div class="preview-item">
+                <span class="preview-label">Signature:</span>
+                <span id="preview-signature">Not provided</span>
+            </div>
+        </div>
+        
+        <!-- Form Actions -->
+        <div class="mt-5">
+            <button type="submit" class="btn btn-submit">
+                <i class="fas fa-paper-plane me-2"></i>Submit Resignation Request
+            </button>
+
+        </div>
+    </form>
+</div>
+
+
+<div class="table-container">
+<h5>Resignation Requests</h5>
+    <div class="table-responsive">
+<table class="table">
+    <thead>
+        <tr>
+            <th>Employee Name</th>
+            <th>Employee ID</th>
+            <th>Resignation Date</th>
+            <th>Last Working Day</th>
+            <th>Reason</th>
+            <th>Other Reason</th>
+            <th>Signature</th>
+            <th>Resignation Letter</th>
+            <th>Submitted At</th>
+            <th>Status</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in requests %}
+        <tr>
+            <td>{{ item.employee.first_name}} {{ item.employee.last_name }}</td>
+            <td>{{ item.employee.employee_id }}</td>
+            <td>{{ item.resignation_date }}</td>
+            <td>{{ item.last_working_day }}</td>
+            <td>{{ item.resignation_reason }}</td>
+            <td>{{ item.other_reason }}</td>
+
+           <!-- Signature Preview -->
+            <td>
+                {% if item.signature_data %}
+                    <a href="{{ item.signature_data }}" target="_blank">
+                        <img src="{{ item.signature_data }}" alt="Signature" style="height: 40px;">
+                    </a>
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+
+
+
+            <!-- Resignation Letter Download -->
+            <td>
+                {% if item.resignation_letter %}
+                    <a href="{{ item.resignation_letter.url }}" target="_blank">View</a>
+                {% else %}
+                    N/A
+                {% endif %}
+            </td>
+
+            <td>{{ item.submitted_at|date:"Y-m-d H:i" }}</td>
+            <td>
+                <span class="status-badge">{{ item.status|capfirst }}</span>
+            </td>
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+</div>
+</div>
+
+<!-- Include JavaScript at the end of the content block -->
+{% block extra_js %}
+<!-- Bootstrap & Signature Pad JS -->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>-->
+<script src="https://cdn.jsdelivr.net/npm/signature_pad@4.0.0/dist/signature_pad.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+<script>
+    // Initialize Signature Pad
+    const canvas = document.getElementById('signature-pad');
+    const signaturePad = new SignaturePad(canvas, {
+        backgroundColor: 'rgba(255, 255, 255, 0)',
+        penColor: 'rgb(0, 0, 0)',
+        minWidth: 1,
+        maxWidth: 3
+    });
+    
+    // Set canvas size
+    function resizeCanvas() {
+        const ratio = Math.max(window.devicePixelRatio || 1, 1);
+        canvas.width = canvas.offsetWidth * ratio;
+        canvas.height = canvas.offsetHeight * ratio;
+        canvas.getContext('2d').scale(ratio, ratio);
+        signaturePad.clear();
+    }
+    
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    
+    // Clear signature
+    document.getElementById('clear-signature').addEventListener('click', () => {
+        signaturePad.clear();
+        document.getElementById('preview-signature').textContent = 'Not provided';
+        document.getElementById('signatureData').value = '';
+        updateProgress();
+    });
+    
+    // Save signature
+    document.getElementById('save-signature').addEventListener('click', () => {
+        if (signaturePad.isEmpty()) {
+            alert('Please provide your signature first.');
+        } else {
+            document.getElementById('preview-signature').textContent = 'Provided';
+            document.getElementById('signatureData').value = signaturePad.toDataURL();
+            updateProgress();
+        }
+    });
+    
+    // Set default dates
+    const today = new Date();
+    const twoWeeksLater = new Date();
+    twoWeeksLater.setDate(today.getDate() + 14);
+    
+    document.getElementById('resignationDate').valueAsDate = today;
+    document.getElementById('lastWorkingDay').valueAsDate = twoWeeksLater;
+    document.getElementById('preview-resign-date').textContent = formatDate(today);
+    document.getElementById('preview-last-day').textContent = formatDate(twoWeeksLater);
+    
+    // Update preview dates
+    document.getElementById('resignationDate').addEventListener('change', function() {
+        document.getElementById('preview-resign-date').textContent = formatDate(this.value);
+        updateProgress();
+    });
+    
+    document.getElementById('lastWorkingDay').addEventListener('change', function() {
+        document.getElementById('preview-last-day').textContent = formatDate(this.value);
+        updateProgress();
+    });
+    
+    // Reason selection
+    const reasonBadges = document.querySelectorAll('.reason-option');
+    reasonBadges.forEach(badge => {
+        badge.addEventListener('click', function() {
+            reasonBadges.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            const reason = this.getAttribute('data-reason');
+            document.getElementById('resignationReason').value = reason;
+            document.getElementById('preview-reason').textContent = this.textContent;
+            
+            if (reason === 'Other') {
+                document.getElementById('otherReasonContainer').style.display = 'block';
+            } else {
+                document.getElementById('otherReasonContainer').style.display = 'none';
+            }
+            
+            updateProgress();
+        });
+    });
+    
+    // File upload handling
+    const fileUploadArea = document.getElementById('fileUploadArea');
+    const fileInput = document.getElementById('resignationLetter');
+    const filePreview = document.getElementById('filePreview');
+    
+    fileUploadArea.addEventListener('click', () => {
+        fileInput.click();
+    });
+    
+    fileInput.addEventListener('change', function() {
+        if (this.files.length > 0) {
+            const file = this.files[0];
+            filePreview.innerHTML = `
+                <div class="alert alert-success d-flex align-items-center">
+                    <i class="fas fa-file-pdf me-3 fs-4 text-danger"></i>
+                    <div>
+                        <strong>${file.name}</strong> (${formatFileSize(file.size)})
+                        <div class="text-muted">Ready to upload</div>
+                    </div>
+                </div>
+            `;
+            updateProgress();
+        }
+    });
+    
+    // Form submission
+    document.getElementById('resignationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        if (signaturePad.isEmpty()) {
+            alert('Please provide your electronic signature before submitting.');
+            return;
+        }
+        
+        if (!document.getElementById('agreement').checked) {
+            alert('Please agree to the declaration before submitting.');
+            return;
+        }
+        
+        // Submit the form
+        this.submit();
+    });
+    
+    // Helper functions
+    function formatDate(dateString) {
+        if (!dateString) return 'Not set';
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return 'Invalid date';
+        
+        const options = { year: 'numeric', month: 'long', day: 'numeric' };
+        return date.toLocaleDateString('en-US', options);
+    }
+    
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+    
+    function updateProgress() {
+        const fields = [
+            document.getElementById('resignationDate').value,
+            document.getElementById('lastWorkingDay').value,
+            document.getElementById('resignationReason').value,
+            !signaturePad.isEmpty(),
+            document.getElementById('agreement').checked
+        ];
+        
+        const completed = fields.filter(field => field).length;
+        const progress = (completed / fields.length) * 100;
+        document.getElementById('form-progress').style.width = progress + '%';
+    }
+    
+    // Initialize progress
+    updateProgress();
+    
+    // Handle drag and drop for file upload
+    fileUploadArea.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        fileUploadArea.style.borderColor = '#4361ee';
+        fileUploadArea.style.backgroundColor = '#eef2ff';
+    });
+    
+    fileUploadArea.addEventListener('dragleave', () => {
+        fileUploadArea.style.borderColor = '#e1e5eb';
+        fileUploadArea.style.backgroundColor = '#f9fafb';
+    });
+    
+    fileUploadArea.addEventListener('drop', (e) => {
+        e.preventDefault();
+        fileUploadArea.style.borderColor = '#e1e5eb';
+        fileUploadArea.style.backgroundColor = '#f9fafb';
+        
+        if (e.dataTransfer.files.length) {
+            fileInput.files = e.dataTransfer.files;
+            const event = new Event('change');
+            fileInput.dispatchEvent(event);
+        }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const reasonOptions = document.querySelectorAll('.reason-option');
+        const hiddenInput = document.getElementById('resignationReason');
+        const otherReasonContainer = document.getElementById('otherReasonContainer');
+        const otherReasonInput = document.getElementById('otherReason');
+
+        reasonOptions.forEach(option => {
+            option.addEventListener('click', function () {
+                // Remove "selected" from all
+                reasonOptions.forEach(btn => btn.classList.remove('selected'));
+                // Add "selected" to clicked
+                this.classList.add('selected');
+
+                const selectedReason = this.dataset.value;
+                hiddenInput.value = selectedReason;
+
+                // Show/hide "Other" input field
+                if (selectedReason === "Other") {
+                    otherReasonContainer.style.display = "block";
+                    otherReasonInput.setAttribute("required", "required");
+                } else {
+                    otherReasonContainer.style.display = "none";
+                    otherReasonInput.removeAttribute("required");
+                    otherReasonInput.value = "";
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
+{% endblock %}

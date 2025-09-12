@@ -1,0 +1,106 @@
+/* login_logs.css */
+
+/* Container spacing */
+.container {
+  max-width: 1000px;
+  margin: 0 auto; /* Center container */
+}
+
+/* Heading style */
+h4 {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Filter form inputs */
+form.mb-4 input.form-control {
+  width: 200px;
+  min-width: 150px;
+}
+
+/* Button styling */
+form.mb-4 button,
+form.mb-4 a.btn {
+  min-width: 90px;
+}
+
+/* Table styles */
+table.table {
+  border-collapse: separate;
+  border-spacing: 0 0.5rem;
+}
+
+/* Table header fixed with sticky */
+table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #343a40; /* Bootstrap dark */
+  color: #fff;
+  z-index: 10;
+  vertical-align: middle;
+  text-align: center;
+  padding: 0.75rem 0.5rem;
+}
+
+/* Table rows */
+table tbody tr {
+  background-color: #fff;
+  transition: background-color 0.15s ease-in-out;
+}
+
+/* Highlight today's login rows */
+table tbody tr.table-success {
+  background-color: #d1e7dd !important; /* Bootstrap success light background */
+}
+
+/* Hover effect */
+table tbody tr:hover {
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+/* Text wrapping in Device Info column */
+td.text-break {
+  word-wrap: break-word;
+  white-space: normal !important;
+  max-width: 300px;
+  overflow-wrap: break-word;
+}
+
+/* Responsive adjustments */
+@media (max-width: 767px) {
+  form.mb-4 {
+    flex-direction: column;
+  }
+
+  form.mb-4 input.form-control,
+  form.mb-4 button,
+  form.mb-4 a.btn {
+    width: 100%;
+    min-width: auto;
+    margin-bottom: 0.5rem;
+  }
+
+  table thead th,
+  table tbody td {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.6rem;
+  }
+}
+
+/* Center "No login logs found" message */
+tbody td.text-center.text-muted {
+  font-style: italic;
+  color: #888;
+  padding: 1rem;
+  text-align: center;
+}
+
+/* Optional Zebra striping if you want alternate row colors */
+/*
+table tbody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+*/
+
+

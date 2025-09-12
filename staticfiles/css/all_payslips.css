@@ -1,0 +1,85 @@
+@page {
+    size: A4;
+    margin: 20mm; 
+    background: url("{{ logo_url }}") no-repeat center;
+    background-size: 40%;
+    background-opacity: 1;
+    z-index: 1000;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.payslip-header {
+    display: flex;
+    align-items: center;  
+    margin-bottom: 10px;
+}
+#imgg{
+  height:50px;
+  margin-top:-20px
+}
+#texxt{
+  font-size:25px;
+  margin-left:20px;
+  margin-top:-20px
+}
+
+h3 {
+    text-align: center;
+    width: 100%;
+    margin-top: 20px;  
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 10px 0; 
+}
+
+th, td {
+    border: 1px solid rgb(0, 0, 0);
+    padding: 4px; 
+    text-align: left;
+}
+
+.payslip-details {
+    width: 100%;
+}
+
+.payslip-details th {
+    text-align: left;
+}
+
+.payslip-details td {
+    text-align: left;
+}
+
+.page-break {
+    page-break-before: always;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+
+    table {
+        margin-top: 0;
+    }
+
+    .payslip-section {
+        page-break-before: always;
+    }
+    .payslip-footer {
+        page-break-inside: avoid;
+    }
+
+    body {
+        margin-bottom: 20mm;
+    }
+
+}

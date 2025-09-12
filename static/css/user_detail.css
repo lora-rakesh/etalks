@@ -1,0 +1,85 @@
+
+.content h6 {
+    color: #495057;
+    font-size: 1rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+}
+
+.card {
+    background:rgb(243, 243, 243);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(2, 2, 2, 0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.card-title {
+    color: #212529;
+    font-size: 1.25rem;
+    font-weight: 600;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 0.5rem;
+}
+
+.card-text {
+    color: #495057;
+    margin-bottom: 0.75rem;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+}
+
+.card-text:last-of-type {
+    margin-bottom: 1.5rem;
+}
+
+@media (max-width: 768px) {
+    .card {
+        margin: 1rem;
+    }
+    
+    .col-md-5 {
+        padding: 1rem;
+    }
+    
+    .col-md-5 img {
+        height: 200px;
+        width: 200px;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .card-title {
+        font-size: 1.1rem;
+    }
+    
+    .card-text {
+        font-size: 0.9rem;
+    }
+    
+ 
+}
+
+@media (max-width: 576px) {
+    .content {
+        padding: 1rem 0.5rem;
+    }
+    
+   
+    
+    .card-body {
+        padding: 1rem;
+    }
+}
+    

@@ -1,0 +1,885 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Salary Details</small>
+    </a>
+</li>
+{% endblock %}
+
+
+{% block sidebar %}
+<!-- 
+<link rel="stylesheet" href="{% static 'css/salary_details.css' %}"> -->
+<style>
+        .salary-slip {
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #333;
+        position: relative;
+    }
+     
+    
+    .payslip-section {
+        position: relative;
+        page-break-before: always;
+        margin-bottom: 30px;
+        padding-bottom: 20px; 
+        border-bottom: 2px solid black; 
+    }
+     
+    /* Optional: You can adjust the color or thickness of the line */
+    .payslip-section:last-child {
+        border-bottom: none; /* Remove border from the last payslip to prevent extra line */
+    }
+     
+    /* Center the watermark image within each payslip section */
+    .background-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.3;  /* Adjust the transparency of the watermark */
+        pointer-events: none;
+    }
+     
+    .background-image img {
+        width: 350px;
+        height: 400px;
+    }
+     
+    /* Header Styles */
+    /* .header {
+        text-align: center;
+        margin-bottom: 1px;
+        position: relative;
+        z-index: 1;
+    }
+     
+    .header img {
+        max-width: 150px;
+    } */
+     
+    /* Header Styles */
+    .header {
+        display: flex;
+        justify-content: flex-start; /* Ensures content is on left and right */
+        align-items: center; /* Aligns the logo and company name vertically */
+        margin-bottom: 10px;
+        position: relative; /* Ensure the header stays on top of the watermark */
+        width: 100%;
+     
+    }
+     
+     
+    .header img {
+        max-width: 300px;
+        height: 100px;
+        width: 200px;
+        margin-left: 10px;
+        justify-content:center;
+    }
+     
+    .company-name {
+        flex: 1; /* This ensures the company name takes up the remaining space */
+        text-align: center; /* Center the company name */
+    }
+     
+    .company-name h1 {
+        font-size: 40px;
+        font-weight: bold;
+        color: #333;
+        margin: 20px; /* Remove default margin */
+        margin-left: -40px;
+    }
+     
+     
+    .payslip-month-title {
+        text-align: center;
+        font-size: 16px;
+        /* font-weight: bold; */
+        color: #333;
+        margin-top: 10px; /* Space above the payslip text */
+    }
+     
+    /* Table styles */
+    table.payslip-details-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        position: relative;  /* Ensure the table stays on top of the watermark */
+    }
+    
+    table.payslip-details-table th, table.payslip-details-table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+        font-size: 14px;
+    }
+     
+    /* Button styles for downloading */
+    .download-btn {
+        display:inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-left: 340px;
+    }
+     
+    .download-btn:hover {
+        background-color: #213e88;
+    }
+     
+     
+    p {
+        text-align: right;
+        font-size: 14px;
+        color: #333;
+        font-weight: bold;
+    }
+     
+    a {
+        text-decoration: none;
+    }
+     
+    /* Button styles for downloading */
+    .no-print {
+        display: inline-block;  /* Make sure it's visible when not printing */
+    }
+     
+    /* Hide the button only when printing */
+    @media print {
+        .no-print {
+            display: none;  /* Hide only during printing */
+        }
+    }
+     
+   
+
+
+/* Base Styles */
+.salary-slip {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    position: relative;
+}
+
+/* Background watermark image for each payslip */
+.payslip-section {
+    position: relative;
+    page-break-before: always;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid black;
+}
+
+.payslip-section:last-child {
+    border-bottom: none;
+}
+
+/* Center the watermark image within each payslip section */
+.background-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.background-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.header img {
+    max-width: 100%;
+    height: auto;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.lora-head{
+        font-size:35px;
+        text-align:center;
+        margin-left:60px;
+        align-items:center;
+    }
+.company-name {
+    text-align: center;
+}
+
+.company-name h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.payslip-month-title {
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Table styles */
+table.payslip-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+table.payslip-details-table th, table.payslip-details-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+/* Button styles for downloading */
+.download-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin: 14px auto;
+    text-align: center;
+    
+}
+
+.download-btn:hover {
+    background-color: #003cff;
+}
+
+p {
+    text-align: right;
+    font-size: 0.875rem;
+    color: #333;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+.no-print {
+    display: inline-block;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+
+form.filter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+    padding-top: 0;
+}
+
+form label {
+    font-size: 1rem;
+    color: #333;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+form input[type="month"] {
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    max-width: 180px;
+    box-sizing: border-box;
+}
+
+form input[type="month"]:hover,
+form input[type="month"]:focus {
+   
+    outline: none;
+    background-color: #f4f9ff;
+}
+
+.buttn[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttn[type="submit"]:hover {
+    background-color: #003cff;
+}
+
+form button[type="submit"]:focus {
+    outline: none;
+}
+
+.down {
+    margin-top: 6px;
+}
+
+#butt{
+     margin-top:20px;
+   }
+
+@media screen and (max-width: 1024px) {
+    .lora-head {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .lora-head {
+        font-size: 24px;
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .lora-head {
+        font-size: 25px;
+       margin-right:20px;
+       
+    }
+    form input[type="month"] {
+        max-width:80vw;
+    }
+    .row>*{
+      width:unset;
+    }
+    
+}
+
+
+
+@media (min-width: 768px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header img {
+        margin-bottom: 0;
+    }
+
+    .company-name h1 {
+        font-size: 2.5rem;
+    }
+
+    .payslip-month-title {
+        font-size: 1.25rem;
+    }
+
+    table.payslip-details-table th, table.payslip-details-table td {
+        font-size: 1rem;
+    }
+
+    form.filter-form {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    form input[type="month"] {
+        width: 180px;
+    }
+   
+}
+
+@media (min-width: 1024px) {
+    .company-name h1 {
+        font-size: 3rem;
+    }
+
+    .payslip-month-title {
+        font-size: 1.5rem;
+    }
+
+    table.payslip-details-table th, table.payslip-details-table td {
+        font-size: 1.125rem;
+    }
+   
+   .row>*{
+    width:auto;
+   }
+   #butt{
+     margin-top:10px;
+   }
+}
+.tbl{
+    color:#22517d;
+}
+
+@media (max-width: 420px) {
+    .salary-slip {
+        padding: 10px; 
+    }
+
+    .payslip-details-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap; 
+    }
+
+    .payslip-details-table th,
+    .payslip-details-table td {
+        font-size: 12px; 
+        padding: 5px; 
+    }
+
+    form.filter-form {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 5px;
+    }
+
+    form input[type="month"] {
+        max-width: 100%;
+    }
+
+    /* Adjust the header */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header img {
+        max-width: 150px;
+        height: auto;
+        margin-left:-50px
+    }
+
+    .company-name h1 {
+        font-size: 22px;
+        margin-left: 0;
+    }
+
+    .download-btn {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+        margin-top:20px;
+    }
+}
+
+@media (max-width: 375px) {
+    th, td{
+       font-size:10px;
+       padding:revert-layer;
+     
+    }
+    .lora-head {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .salary-slip {
+       width: 95%;
+       
+    }
+
+    .payslip-details-table th,
+    .payslip-details-table td {
+        font-size: 11px; 
+    }
+
+
+    form.filter-form {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    form input[type="month"] {
+        max-width: 100%;
+    }
+
+    .download-btn {
+        font-size: 14px;
+        padding: 8px 15px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .company-name h1 {
+        font-size: 20px;
+    }
+
+    .payslip-details-table th,
+    .payslip-details-table td {
+        font-size: 10px;
+        padding: 3px;
+    }
+}
+
+@media (max-width: 425px) {
+    th, td{
+       font-size:10px;
+       padding:revert-layer;
+     
+    }
+    .lora-head {
+        font-size: 22px;
+        text-align: center;
+        margin-left:-1px;
+    }
+
+    .salary-slip {
+       width: 95%;
+       
+    }
+
+    .payslip-details-table th,
+    .payslip-details-table td {
+        font-size: 11px; 
+    }
+
+
+    form.filter-form {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    form input[type="month"] {
+        max-width: 100%;
+    }
+
+    .download-btn {
+        font-size: 14px;
+        padding: 8px 15px;
+        margin-left: 0;
+    }
+}
+    </style>
+
+<li class="sidebar-item">
+    <a href="/salary_details" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-currency-rupee mx-3" viewBox="0 0 16 16">
+            <path d="M4 3.06h2.726c1.22 0 2.12.575 2.325 1.724H4v1.051h5.051C8.855 7.001 8 7.558 6.788 7.558H4v1.317L8.437 14h2.11L6.095 8.884h.855c2.316-.018 3.465-1.476 3.688-3.049H12V4.784h-1.345c-.08-.778-.357-1.335-.793-1.732H12V2H4z"/>
+          </svg>
+        Salary Details
+    </a>
+</li>
+
+<li class="sidebar-item">
+    <a href="/expense_claims" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-graph-up-arrow mx-3" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M0 0h1v15h15v1H0zm10 3.5a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 .5.5v4a.5.5 0 0 1-1 0V4.9l-3.613 4.417a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61L13.445 4H10.5a.5.5 0 0 1-.5-.5"/>
+        </svg>
+        Expense Claims
+    </a>
+</li>
+
+<li class="sidebar-item">
+    <a href="/tax_deduction" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-currency-exchange mx-3" viewBox="0 0 16 16">
+            <path d="M0 5a5 5 0 0 0 4.027 4.905 6.5 6.5 0 0 1 .544-2.073C3.695 7.536 3.132 6.864 3 5.91h-.5v-.426h.466V5.05q-.001-.07.004-.135H2.5v-.427h.511C3.236 3.24 4.213 2.5 5.681 2.5c.316 0 .59.031.819.085v.733a3.5 3.5 0 0 0-.815-.082c-.919 0-1.538.466-1.734 1.252h1.917v.427h-1.98q-.004.07-.003.147v.422h1.983v.427H3.93c.118.602.468 1.03 1.005 1.229a6.5 6.5 0 0 1 4.97-3.113A5.002 5.002 0 0 0 0 5m16 5.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0m-7.75 1.322c.069.835.746 1.485 1.964 1.562V14h.54v-.62c1.259-.086 1.996-.74 1.996-1.69 0-.865-.563-1.31-1.57-1.54l-.426-.1V8.374c.54.06.884.347.966.745h.948c-.07-.804-.779-1.433-1.914-1.502V7h-.54v.629c-1.076.103-1.808.732-1.808 1.622 0 .787.544 1.288 1.45 1.493l.358.085v1.78c-.554-.08-.92-.376-1.003-.787zm1.96-1.895c-.532-.12-.82-.364-.82-.732 0-.41.311-.719.824-.809v1.54h-.005zm.622 1.044c.645.145.943.38.943.796 0 .474-.37.8-1.02.86v-1.674z"/>
+        </svg>
+        Tax Deduction
+    </a>
+</li>
+
+<li class="sidebar-item">
+    <a href="/loan_requests" class="sidebar-link mt-2 w3-bar-item w3-button tablink" style='color: black;'>
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" class="bi bi-bank mx-3" viewBox="0 0 16 16">
+            <path d="m8 0 6.61 3h.89a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5H15v7a.5.5 0 0 1 .485.38l.5 2a.498.498 0 0 1-.485.62H.5a.498.498 0 0 1-.485-.62l.5-2A.5.5 0 0 1 1 13V6H.5a.5.5 0 0 1-.5-.5v-2A.5.5 0 0 1 .5 3h.89zM3.777 3h8.447L8 1zM2 6v7h1V6zm2 0v7h2.5V6zm3.5 0v7h1V6zm2 0v7H12V6zM13 6v7h1V6zm2-1V4H1v1zm-.39 9H1.39l-.25 1h13.72z"/>
+        </svg>
+        Loan request
+    </a>
+</li>
+{% endblock %}
+
+{% block content %}
+    {% if messages %}
+        <div class="mt-2">
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+<div class="mx-auto">
+
+    <div class="container-fluid salary-slip">
+        <!-- Filter form for selecting From and To months -->
+        <div class="mx-auto">
+            <form id="height" method="get" class="filter-form pt-4">
+                <h6 for="from_month">Choose months : </h6>
+                <div class="form-group form-control-sm">
+
+                    <span class="down" for="from_month">From</span>
+                    <input class="down" type="month" id="from_month" name="from_month" value="{{ from_month }}" required>
+
+                    <span class="down" for="to_month">To</span>
+                    <input class="down" type="month" id="to_month" name="to_month" value="{{ to_month }}" required>
+
+                </div>
+                <div class="row">
+                    <div  class="fd form-group" >
+                        <button type="submit" class="buttn" style="margin-top:14px;" >Search</button>
+                    </div>
+                    <div  class="payslip-footer">
+                        <a href="{% url 'generate_payslip_pdf' employee_id=employee.id %}?from_month={{ from_month }}&to_month={{ to_month }}" class="download-btn no-print buttn" >Download Payslip</a>
+                    </div>
+                   
+                </div>
+                
+            </form>
+        </div>
+
+        <div class="mx-auto">
+ 
+            {% for payslip in payslips %}
+                <div class="payslip-section {% if forloop.counter > 1 %}page-break{% endif %} mt-2">
+    
+                        <!-- Background Watermark Image -->
+                        <div class="background-image">
+                            {% if request.user.company.logo %}
+                                <img src="{{ request.user.company.logo.url }}" alt="Company Symbol">
+                            {% else %}
+                                <h3>Company Logo</h3>
+                            {% endif %}
+                        </div>
+
+                        <!-- Company logo on the left -->
+                        <div class="col-3">
+                            {% if request.user.company.logo %}
+                                <img src="{{ request.user.company.logo.url }}" alt="AIHR4U Logo" width="150">
+                            {% else %}
+                               <h5>Company Logo</h5>
+                            {% endif %}
+                        </div>
+
+
+                            <!-- Company name on the right -->
+                            <!-- Company name on the right -->
+                            <div class="">
+                                <h1 class="lora-head text-center">
+                                    {% if request.user.company %}
+                                        {{ request.user.company.company_name }}
+                                    {% else %}
+                                        Company Name
+                                    {% endif %}
+                                </h1>
+                            </div>
+
+                    <h5 class="payslip-month-title py-2">Payslip for the Month {{ payslip.month|date:"F Y" }}</h5>
+    
+                    <table class="tbl py-0">
+
+                        <tr>
+                            <th colspan="2">Employee Name: {{ payslip.employee.first_name }} {{ payslip.employee.last_name }}</th>
+                            <th colspan="3">Employee ID: {{ payslip.employee.employee_id }}</th>
+                        </tr>
+                        <tr>
+                            <th colspan="2">Designation: {{ payslip.employee.designation }}</th>
+                            <th colspan="3">Current MTH cal days: {{ payslip.current_month_calculated_days }}</th>
+                        </tr>
+     
+                        <tr>
+                            <th colspan="2">Bank account: {{ payslip.employee.bank_name }}</th>
+                            <th colspan="3">Current MTH paid days: {{ payslip.current_month_paid_days }}</th>
+                        </tr>
+     
+                        <tr>
+                            <th colspan="2">Bank account no.: {{ payslip.employee.bank_account_number }}</th>
+                            <th colspan="3">PF NO.: {{ payslip.employee.pf_number }}</th>
+                        </tr>
+     
+                        <tr>
+                            <th colspan="2">PAN NO.: {{ payslip.employee.pan_number }}</th>
+                            <th colspan="3">UAN NO.: {{ payslip.employee.uan_number }}</th>
+                        </tr>
+     
+                        <tr>
+                            <th colspan="2">Component</th>
+                            <th colspan="3" style='text-align: right;padding-right:30px'>Monthly (INR)</th>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Basic Salary</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.basic_salary }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">House Rent Allowance (HRA)</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.house_rent_allowance }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Special Allowance</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.special_allowance }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Conveyance Allowance</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.conveyance_allowance }}</td>
+                        </tr>
+                
+                        <tr>
+                            <th colspan="2">Total Fixed Salary</th>
+                            <th colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.total_fixed_salary }}</th>
+                        </tr>
+                
+                        <tr>
+                            <th colspan="5">Deductions</th>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Provident Fund (PF)</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.pf_contribution }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Professional Tax</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.professional_tax }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Income Tax (TDS)</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.income_tax }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Medical Insurance</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.medical_insurance }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Stationery & Misc</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.stationery_misc }}</td>
+                        </tr>
+                
+                        <tr>
+                            <th colspan="2">Total Deductions</th>
+                            <th colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.deductions }}</th>
+                        </tr>
+                
+                        <tr>
+                            <th colspan="5">Variable Pay</th>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Performance Bonus</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.performance_bonus }}</td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="2">Other Incentives</td>
+                            <td colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.other_incentives }}</td>
+                        </tr>
+                
+                        <tr>
+                            <th colspan="2">Total Variable Pay</th>
+                            <th colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.total_variable_pay }}</th>
+                        </tr>
+                
+                        <tr>
+                            <th colspan="2">Gross Salary</th>
+                            <th colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.gross_salary }}</th>
+                        </tr>
+                
+                        <tr>
+                            <th colspan="2">Net Salary (After Deduction)</th>
+                            <th colspan="3" style='text-align: right;padding-right:30px'>{{ payslip.actual_salary }}</th>
+                        </tr>
+
+                        <tr>
+                            <th>Total Earning</th>
+                            <th>Total Deductions</th>
+                            <th>Loan Deductions</th>
+                            <th>Variable Pay Deductions</th>
+                            <th>Net Salary</th>
+                        </tr>
+
+                        <tr>
+                            <th style='text-align: left;'>{{ payslip.total_fixed_salary }}</th>
+                            <th style='text-align: left;'>{{ payslip.deductions }}</th>
+                            <th style='text-align: left;'>{{ payslip.loan_deductions }}</th>
+                            <th style='text-align: left;'>{{ payslip.total_variable_pay }}</th>
+                            <th style='text-align: left;'>{{ payslip.actual_salary }}</th>
+                        </tr>
+     
+                        <tr>
+                            <td colspan="5" style="color: green;">
+                                Salary credited to A/C no. <b>{{ payslip.employee.bank_account_number }}, Rs {{ payslip.actual_salary }}/-</b>
+                            </td>
+                        </tr>
+                
+                        <tr>
+                            <td colspan="5">
+                                GST (w.e.f. July 1, 2017) is applicable on Canteen Deduction, Gym Fees, Admin Charges, Mobile Deduction,
+                                Postage, Notice Period Recovery, Monetary Fund, and Bus Service Charges at applicable rates.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="5">
+                                Address: 5th floor, Jain Sadguru Images Capital Park, 502B, Capital Pk Rd, VIP Hills, Jaihind Enclave, Madhapur, Hyderabad, Telangana 500081.
+                            </td>
+                        </tr>
+
+                    </table>
+                
+                </div>
+            {% endfor %}
+              
+            <!-- <div class="payslip-footer">
+                <a href="{% url 'generate_payslip_pdf' employee_id=employee.id %}?from_month={{ from_month }}&to_month={{ to_month }}" class="download-btn no-print">Download Payslips as PDF</a>
+            </div> -->
+
+        </div>
+   
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,90 @@
+    .delete-container {
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 32px;
+        background: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .warning-icon {
+        color: #dc2626;
+        font-size: 48px;
+        margin-bottom: 24px;
+        display: block;
+        text-align: center;
+    }
+
+    .delete-title {
+        color: #111827;
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 16px;
+        text-align: center;
+    }
+
+    .delete-message {
+        color: #4b5563;
+        font-size: 16px;
+        line-height: 1.5;
+        margin-bottom: 32px;
+        text-align: center;
+    }
+
+    .company-name {
+        font-weight: 600;
+        color: #111827;
+    }
+
+    .button-group {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+    }
+
+    .delete-button {
+        background: #dc2626;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .delete-button:hover {
+        background: #b91c1c;
+    }
+
+    .cancel-button {
+        background: #f3f4f6;
+        color: #374151;
+        border: none;
+        border-style:none;
+        padding: 12px 24px;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration:none;
+    }
+
+    .cancel-button:hover {
+        background: #e5e7eb;
+    }
+
+    @media (max-width: 640px) {
+        .delete-container {
+            margin: 20px;
+            padding: 24px;
+        }
+
+        .button-group {
+            flex-direction: column;
+        }
+
+        .delete-button, .cancel-button {
+            width: 100%;
+        }
+    }

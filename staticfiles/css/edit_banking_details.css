@@ -1,0 +1,85 @@
+/* Reset some default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
+
+h3 {
+    text-align: center;
+    color: #4A90E2;
+    margin-bottom: 30px;
+}
+
+/* Form styling */
+form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+form button {
+    display: block;
+    margin: 20px auto 0 auto; /* Center the button and add some margin */
+    background-color: #4A90E2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-col
+    
+
+}
+
+form button:hover {
+    background-color: #357ABD;
+}
+
+form a {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    color: #999;
+    text-decoration: none;
+}
+
+form a:hover {
+    color: #4A90E2;
+}
+
+/* Form input fields */
+input[type="text"], input[type="email"], input[type="number"], input[type="password"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+input[type="text"]:focus, input[type="email"]:focus, input[type="number"]:focus, input[type="password"]:focus, select:focus {
+    outline: none;
+    border-color: #4A90E2;
+}
+
+/* Spacing for each input */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* CSRF token styling */
+.csrf-token {
+    display: none;
+}

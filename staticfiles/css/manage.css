@@ -1,0 +1,202 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 1500px;
+    margin: 0 auto;
+    /* padding: 20px; */
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #007bff;
+    color: white;
+    padding: 10px 20px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+.nav-btn {
+    background: #fff;
+    color: #007bff;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 5px;
+}
+
+.nav-btn:hover {
+    background: #e0e0e0;
+}
+
+.nav-btn:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px #007bff;
+}
+
+main {
+    margin-top: 20px;
+}
+
+.interface {
+    display: none;
+}
+
+.interface.active {
+    display: block;
+}
+
+form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+form button:hover {
+    background: #0056b3;
+}
+
+form button:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px #007bff;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#calendar {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+#calendar div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 100px; /* Ensure consistent height */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+}
+
+#calendar .past-date {
+    background: #28a745;
+    color: white;
+}
+
+#calendar .current-date {
+    background: #17a2b8;
+    color: white;
+    font-weight: bold;
+}
+
+#calendar .task-date {
+    background: #17a2b8;
+    color: white;
+    cursor: pointer;
+}
+
+#calendar .task-date:hover {
+    background: #138496;
+}
+
+#calendar .task-date:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px #17a2b8;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 500px;
+    background: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal.active {
+    display: block;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.modal-header h2 {
+    margin: 0;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #007bff;
+}
+
+.modal-close:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px #007bff;
+}
+
+.calendar-header button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 5px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.calendar-header button:hover {
+    background: #0056b3;
+}
+
+.calendar-header button:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px #007bff;
+}
+

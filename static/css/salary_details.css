@@ -1,0 +1,543 @@
+    .salary-slip {
+        width: 100%;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        color: #333;
+        position: relative;
+    }
+     
+    
+    .payslip-section {
+        position: relative;
+        page-break-before: always;
+        margin-bottom: 30px;
+        padding-bottom: 20px; 
+        border-bottom: 2px solid black; 
+    }
+     
+    /* Optional: You can adjust the color or thickness of the line */
+    .payslip-section:last-child {
+        border-bottom: none; /* Remove border from the last payslip to prevent extra line */
+    }
+     
+    /* Center the watermark image within each payslip section */
+    .background-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0.3;  /* Adjust the transparency of the watermark */
+        pointer-events: none;
+    }
+     
+    .background-image img {
+        width: 350px;
+        height: 400px;
+    }
+     
+    /* Header Styles */
+    /* .header {
+        text-align: center;
+        margin-bottom: 1px;
+        position: relative;
+        z-index: 1;
+    }
+     
+    .header img {
+        max-width: 150px;
+    } */
+     
+    /* Header Styles */
+    .header {
+        display: flex;
+        justify-content: flex-start; /* Ensures content is on left and right */
+        align-items: center; /* Aligns the logo and company name vertically */
+        margin-bottom: 10px;
+        position: relative; /* Ensure the header stays on top of the watermark */
+        width: 100%;
+     
+    }
+     
+     
+    .header img {
+        max-width: 300px;
+        height: 100px;
+        width: 200px;
+        margin-left: 18px;
+     
+    }
+     
+    .company-name {
+        flex: 1; /* This ensures the company name takes up the remaining space */
+        text-align: center; /* Center the company name */
+    }
+     
+    .company-name h1 {
+        font-size: 40px;
+        font-weight: bold;
+        color: #333;
+        margin: 20px; /* Remove default margin */
+        margin-left: -40px;
+    }
+     
+     
+    .payslip-month-title {
+        text-align: center;
+        font-size: 16px;
+        /* font-weight: bold; */
+        color: #333;
+        margin-top: 10px; /* Space above the payslip text */
+    }
+     
+    /* Table styles */
+    table.payslip-details-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+        position: relative;  /* Ensure the table stays on top of the watermark */
+    }
+    
+    table.payslip-details-table th, table.payslip-details-table td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: left;
+        font-size: 14px;
+    }
+     
+    /* Button styles for downloading */
+    .download-btn {
+        display:inline-block;
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: background-color 0.3s ease;
+        margin-left: 340px;
+    }
+     
+    .download-btn:hover {
+        background-color: #1d4ed8;
+    }
+     
+     
+    p {
+        text-align: right;
+        font-size: 14px;
+        color: #333;
+        font-weight: bold;
+    }
+     
+    a {
+        text-decoration: none;
+    }
+     
+    /* Button styles for downloading */
+    .no-print {
+        display: inline-block;  /* Make sure it's visible when not printing */
+    }
+     
+    /* Hide the button only when printing */
+    @media print {
+        .no-print {
+            display: none;  /* Hide only during printing */
+        }
+    }
+     
+   
+
+
+/* Base Styles */
+.salary-slip {
+    width: 100%;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #333;
+    position: relative;
+}
+
+/* Background watermark image for each payslip */
+.payslip-section {
+    position: relative;
+    page-break-before: always;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid black;
+}
+
+.payslip-section:last-child {
+    border-bottom: none;
+}
+
+/* Center the watermark image within each payslip section */
+.background-image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.background-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+}
+
+/* Header Styles */
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+    position: relative;
+}
+
+.header img {
+    max-width: 100%;
+    height: auto;
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+.lora-head{
+        font-size:35px;
+        text-align:center;
+        margin-left:60px;
+        align-items:center;
+    }
+.company-name {
+    text-align: center;
+}
+
+.company-name h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.payslip-month-title {
+    text-align: center;
+    font-size: 1rem;
+    color: #333;
+    margin-top: 10px;
+}
+
+/* Table styles */
+table.payslip-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+table.payslip-details-table th, table.payslip-details-table td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+    font-size: 0.875rem;
+}
+
+/* Button styles for downloading */
+.download-btn {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    margin: 14px auto;
+    text-align: center;
+    
+}
+
+.download-btn:hover {
+    background-color: #1d4ed8;
+}
+
+p {
+    text-align: right;
+    font-size: 0.875rem;
+    color: #333;
+    font-weight: bold;
+}
+
+a {
+    text-decoration: none;
+}
+
+.no-print {
+    display: inline-block;
+}
+
+@media print {
+    .no-print {
+        display: none;
+    }
+}
+
+form.filter-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 7px;
+    padding-top: 0;
+}
+
+form label {
+    font-size: 1rem;
+    color: #333;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+form input[type="month"] {
+    padding: 5px;
+    font-size: 1rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #333;
+    width: 100%;
+    max-width: 180px;
+    box-sizing: border-box;
+}
+
+form input[type="month"]:hover,
+form input[type="month"]:focus {
+    border-color: #007bff;
+    outline: none;
+    background-color: #f4f9ff;
+}
+
+form button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 1rem;
+   
+    color:black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+form button[type="submit"]:hover {
+    background-color: #1d4ed8;
+}
+
+form button[type="submit"]:focus {
+    outline: none;
+}
+
+.down {
+    margin-top: 6px;
+}
+
+#butt{
+     margin-top:20px;
+   }
+
+@media screen and (max-width: 1024px) {
+    .lora-head {
+        font-size: 30px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .lora-head {
+        font-size: 24px;
+        padding: 5px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .lora-head {
+        font-size: 25px;
+       margin-right:20px;
+       
+    }
+    form input[type="month"] {
+        max-width:80vw;
+    }
+    .row>*{
+      width:unset;
+    }
+    
+}
+
+
+
+@media (min-width: 768px) {
+    .header {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header img {
+        margin-bottom: 0;
+    }
+
+    .company-name h1 {
+        font-size: 2.5rem;
+    }
+
+    .payslip-month-title {
+        font-size: 1.25rem;
+    }
+
+    table.payslip-details-table th, table.payslip-details-table td {
+        font-size: 1rem;
+    }
+
+    form.filter-form {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    form input[type="month"] {
+        width: 180px;
+    }
+   
+}
+
+@media (min-width: 1024px) {
+    .company-name h1 {
+        font-size: 3rem;
+    }
+
+    .payslip-month-title {
+        font-size: 1.5rem;
+    }
+
+    table.payslip-details-table th, table.payslip-details-table td {
+        font-size: 1.125rem;
+    }
+   
+   .row>*{
+    width:auto;
+   }
+   #butt{
+     margin-top:10px;
+   }
+}
+.tbl{
+    color:#22517d;
+}
+
+@media (max-width: 420px) {
+    .salary-slip {
+        padding: 10px; 
+    }
+
+    .payslip-details-table {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap; 
+    }
+
+    .payslip-details-table th,
+    .payslip-details-table td {
+        font-size: 12px; 
+        padding: 5px; 
+    }
+
+    form.filter-form {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 5px;
+    }
+
+    form input[type="month"] {
+        max-width: 100%;
+    }
+
+    /* Adjust the header */
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .header img {
+        max-width: 150px;
+        height: auto;
+    }
+
+    .company-name h1 {
+        font-size: 22px;
+        margin-left: 0;
+    }
+
+    .download-btn {
+        width: 100%;
+        text-align: center;
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 375px) {
+    th, td{
+       font-size:7px;
+       padding:revert-layer;
+       column-width: 10px;
+    }
+    .lora-head {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .salary-slip {
+       width: 95%;
+       
+    }
+
+    .payslip-details-table th,
+    .payslip-details-table td {
+        font-size: 11px; 
+    }
+
+
+    form.filter-form {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    form input[type="month"] {
+        max-width: 100%;
+    }
+
+    .download-btn {
+        font-size: 14px;
+        padding: 8px 15px;
+        margin-left: 0;
+    }
+}
+
+@media (max-width: 320px) {
+    .company-name h1 {
+        font-size: 20px;
+    }
+
+    .payslip-details-table th,
+    .payslip-details-table td {
+        font-size: 10px;
+        padding: 3px;
+    }
+}

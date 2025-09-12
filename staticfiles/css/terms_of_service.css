@@ -1,0 +1,57 @@
+   .sidebar-container {
+        width: 100%;
+        padding: 0.5rem;
+    }
+    
+    .sidebar-item {
+        list-style: none;
+        margin-bottom: 0.5rem;
+    }
+    
+    .sidebar-link {
+        display: flex;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        text-decoration: none;
+        color: black;
+        border-radius: 0.5rem;
+        transition: background-color 0.2s ease;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .sidebar-link:hover {
+        background-color: #FFFFFF
+;
+    }
+    
+    .sidebar-link svg {
+        min-width: 18px;
+        margin-right: 1rem;
+    }
+    
+    @media (max-width: 768px) {
+        .sidebar-link {
+            padding: 0.625rem 0.75rem;
+            font-size: 0.875rem;
+        }
+        
+        .sidebar-link svg {
+            margin-right: 0.75rem;
+        }
+    }
+    
+    @media (max-width: 576px) {
+        .sidebar-container {
+            padding: 0.25rem;
+        }
+        
+        .sidebar-link {
+            padding: 0.5rem;
+        }
+        
+        .sidebar-link svg {
+            margin-right: 0.5rem;
+        }
+    }

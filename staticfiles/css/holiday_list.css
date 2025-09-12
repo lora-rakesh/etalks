@@ -1,0 +1,102 @@
+.holidays-container {
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.create-link {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background-color: #0191B4
+;
+  border-color: #0191B4
+;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.create-link:hover {
+  background-color:#1d4ed8;
+}
+
+.holidays-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  border-color:1px solid grey;
+}
+
+.holidays-table th,
+.holidays-table td {
+  padding: 0.75rem;
+  text-align: left;
+  
+}
+#color{
+border-color:grey !important;
+}
+.holidays-table th {
+  background-color:#0191B4
+;
+ 
+}
+
+.view-link {
+  color:rgb(7, 25, 83);
+}
+
+
+
+.delete-link {
+  color: #F44336;
+}
+
+@media screen and (max-width: 768px) {
+  .holidays-table thead {
+    display: none;
+  }
+  
+  .holidays-table, 
+  .holidays-table tbody, 
+  .holidays-table tr, 
+  .holidays-table td {
+    display: block;
+  }
+  
+  .holidays-table tr {
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    padding: 0.5rem;
+  }
+  
+  .holidays-table td {
+    border: none;
+    border-bottom: 1px solid #eee;
+    position: relative;
+    padding-left: 50%;
+  }
+  
+  .holidays-table td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0.75rem;
+    width: 45%;
+    font-weight: bold;
+  }
+  
+  .holidays-table td:last-child {
+    border-bottom: none;
+  }
+}
+
+.edit-button:hover {
+    background-color:rgb(154, 161, 56);
+}
+.delete-button{
+  color:white;
+}
+.delete-button:hover {
+    background-color: #e53e3e;
+}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="{% static 'css/company_delete.css' %}">
+        <title>Company delete | AIHR4U</title>
+
+    </head>
+
+    <body>
+
+        <div class="delete-container">
+            <span class="warning-icon">⚠️</span>
+            <h1 class="delete-title">Delete Company</h1>
+            <p class="delete-message">
+                Are you sure you want to delete <span class="company-name">"{{ company.company_name }}"</span>?<br>
+                This action cannot be undone.
+            </p>
+            <form method="POST">
+                {% csrf_token %}
+                <div class="button-group">
+                    <button type="submit" class="delete-button">Yes, delete</button>
+                    <a href="javascript:history.back()" class="cancel-button">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+    </body>
+
+</html>

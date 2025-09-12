@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500&display=swap" rel="stylesheet">
+        {% load static %}
+        <title>AIHR4U | Review muster</title>
+        <link rel="stylesheet" href="{% static 'css/review_muster.css' %}">
+
+    </head>
+
+    <body>
+
+
+        <div class="wrapper bg-white mb-3">
+
+            <div class="main">
+
+                <nav class="navbar navbar-expand px-3 p-2 shadow">
+
+                    <button class="btn" id="sidebar-toggle" type="button">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <form class="d-flex mx-auto text-center" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Search for user" aria-label="Search">
+                    </form>
+
+                    <div class="navbar-collapse navbar">
+
+                        <div class="nav-item pt-1 text-center mx-auto" style='color: black;'>
+                            <span id="liveClock"></span>
+                        </div>
+                        
+                        <ul class="navbar-nav">
+
+                            <div class="d-flex gap-4">
+
+                                <li class="nav-item dropdown">
+                                    <a href="#" data-bs-toggle="dropdown" style='color: black;'>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                                            <path d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286m1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94"/>
+                                        </svg>                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end pb-4" style="width: 402px;">
+                                        <div class='mx-auto text-center mt-1'>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-card-text mx-1" viewBox="0 0 16 16">
+                                                <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                                                <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5M3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8m0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5"/>
+                                            </svg>
+                                            Quries
+                                        </div>
+                                        <hr>
+                                        <div class="dropdown-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-book mx-1" viewBox="0 0 16 16">
+                                                <path d="M1 2.828c.885-.37 2.154-.769 3.388-.893 1.33-.134 2.458.063 3.112.752v9.746c-.935-.53-2.12-.603-3.213-.493-1.18.12-2.37.461-3.287.811zm7.5-.141c.654-.689 1.782-.886 3.112-.752 1.234.124 2.503.523 3.388.893v9.923c-.918-.35-2.107-.692-3.287-.81-1.094-.111-2.278-.039-3.213.492zM8 1.783C7.015.936 5.587.81 4.287.94c-1.514.153-3.042.672-3.994 1.105A.5.5 0 0 0 0 2.5v11a.5.5 0 0 0 .707.455c.882-.4 2.303-.881 3.68-1.02 1.409-.142 2.59.087 3.223.877a.5.5 0 0 0 .78 0c.633-.79 1.814-1.019 3.222-.877 1.378.139 2.8.62 3.681 1.02A.5.5 0 0 0 16 13.5v-11a.5.5 0 0 0-.293-.455c-.952-.433-2.48-.952-3.994-1.105C10.413.809 8.985.936 8 1.783"/>
+                                            </svg> 
+                                            <small>FAQ(Frequently Asked Questions) - </small><a href='/faq'><small>Know more</small></a>
+                                        </div>
+                                        <hr>
+                                        <div class="dropdown-item">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-envelope-paper mx-1" viewBox="0 0 16 16">
+                                                <path d="M4 0a2 2 0 0 0-2 2v1.133l-.941.502A2 2 0 0 0 0 5.4V14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.4a2 2 0 0 0-1.059-1.765L14 3.133V2a2 2 0 0 0-2-2zm10 4.267.47.25A1 1 0 0 1 15 5.4v.817l-1 .6zm-1 3.15-3.75 2.25L8 8.917l-1.25.75L3 7.417V2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1zm-11-.6-1-.6V5.4a1 1 0 0 1 .53-.882L2 4.267zm13 .566v5.734l-4.778-2.867zm-.035 6.88A1 1 0 0 1 14 15H2a1 1 0 0 1-.965-.738L8 10.083zM1 13.116V7.383l4.778 2.867L1 13.117Z"/>
+                                            </svg>
+                                            <small>Any other issue/quries - </small><a href='/contact_us'><small>contact us</small></a>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="nav-item dropdown">
+
+                                    <a href="#" class="d-flex notification align-items-center text-black text-decoration-none" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="notification bi bi-bell-fill" viewBox="0 0 16 16">
+                                            <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2m.995-14.901a1 1 0 1 0-1.99 0A5 5 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901"/>
+                                        </svg>
+                                    </a>
+
+                                    <ul class="dropdown-menu dropdown-menu-end text-small shadow">
+
+                                        {% if request.user.is_authenticated and request.user.role == 'Employee' %}
+                                            
+                                            <div class='mx-4 py-2' style="width: 400px;">
+                                                <div class='text-center'>Pending Musters</div>
+                                                {% if notifications %}
+                                                    {% for notification in notifications %}
+                                                    <hr class='col-12'>
+                                                        <div>
+                                                            <small>{{ notification.message }}</small>
+                                                        </div>
+                                                        <div>
+                                                            <a href='/muster'><small>Click to check status</small></a>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <div class="notification-bar text-center">No notifications</div>
+                                                {% endif %}
+                                            </div>
+
+                                        {% endif %}
+
+                                        {% if request.user.is_authenticated and request.user.role == 'HR' or request.user.role == 'Manager' or request.user.is_superuser %}
+
+                                            <div class='mx-4 py-2' style="width: 410px;">
+
+                                                <div class='text-center'>Pending Approvals</div>
+
+                                                {% if pending_musters %}
+                                                    {% for muster in pending_musters %}
+                                                    <hr class='col-12'>
+                                                        <div>
+                                                            {{ muster.user.employee_id }} has been requested for Reason: {{muster.reason}} and Notes: {{muster.notes}} on {{ muster.date|date:"F d Y" }}
+                                                            <a href="{% url 'review_muster' muster.id 'approve' %}">Approve</a> | 
+                                                            <a href="{% url 'review_muster' muster.id 'reject' %}">Reject</a>
+                                                        </div>
+                                                    {% endfor %}
+                                                {% else %}
+                                                    <div class="notification-bar text-center">No notifications</div>
+                                                {% endif %}
+
+                                            </div>
+
+                                        {% endif %}
+
+                                    </ul>
+
+                                </li>
+
+                                <li class="nav-item dropdown">
+                                    <a href="#" data-bs-toggle="dropdown" style='color: black;'>
+                                        <img width="28" height="28" src="{% if employee.profile_picture %}{{ employee.profile_picture.url }}{% else %}{% static 'person-circle.svg' %}{% endif %}" alt="Profile Picture" class="profile-icon" loading="lazy">
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end text-center" style="width: 300px;">
+                                        <a href="/profile" class="dropdown-item">Hello, {{user.employee_id.title}}</a>
+                                        <hr>
+                                        <a href="/profile" class="dropdown-item">Profile</a>
+                                        <hr>
+                                        <a href="/logout" class="dropdown-item">Logout</a>
+                                    </div>
+                                </li>
+
+                            </div>
+
+                        </ul>
+
+                    </div>
+
+                </nav>
+
+                <main class="content py-2" id="mainContent">
+
+                    <div class="form-container">
+                        <p><strong>{{ leave_request.employee.username }}</strong> has requested leave from {{ leave_request.start_date }} to {{ leave_request.end_date }}.</p>
+                        <p><em>{{ leave_request.reason }}</em></p>
+                        <form method="POST">
+                            {% csrf_token %}
+                            <label for="status">Select Status: </label>
+                            <select name="status" id="status">
+                                <option value="Approved">Approve</option>
+                                <option value="Rejected">Reject</option>
+                            </select>
+                            <button type="submit">Update Status</button>
+                        </form>
+                    </div>
+
+                </main>
+
+            </div>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+
+        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+
+        <script>
+            function updateClock() {
+                var now = new Date();
+                var day = now.toLocaleString('en-us', { weekday: 'long' });
+                var date = now.getDate();
+                var month = now.toLocaleString('en-us', { month: 'long' });
+                var year = now.getFullYear();
+                var hours = now.getHours();
+                var minutes = now.getMinutes();
+                var seconds = now.getSeconds();
+                var ampm = hours >= 12 ? 'PM' : 'AM';
+
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                minutes = minutes < 10 ? '0' + minutes : minutes;
+                seconds = seconds < 10 ? '0' + seconds : seconds;
+
+                var timeString = date + ' - ' + month + ' - ' + year + ' , ' + day + ' , ' + hours + ' : ' + minutes + ' : ' + seconds + ' ' + ampm;
+    
+                document.getElementById('liveClock').textContent = timeString;
+            }
+
+            setInterval(updateClock, 1000);
+            updateClock();
+        </script>
+
+        <script>
+            const toggleButton = document.getElementById('sidebar-toggle'); 
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.querySelector('.main');
+            
+            toggleButton.addEventListener('click', function () {
+                sidebar.classList.toggle('collapsed');
+                mainContent.classList.toggle('collapsed');
+            });
+        </script>
+
+    </body>
+
+</html>

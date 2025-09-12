@@ -1,0 +1,338 @@
+
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+         margin: 0;}
+         input[type="date"] {
+    appearance: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    padding-right: 30px; 
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 8px; 
+    cursor: pointer;
+    height: 100%; 
+}
+
+.loan-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+
+.form-controls {
+    background-color: #FFFFFF
+ !important;
+    border: 1px solid rgba(0, 0, 0, 0.15) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.text h5 {
+    color: #2d3748;
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+hr {
+    width: 50%;
+    margin: 1rem auto;
+    opacity: 0.2;
+    border-color: #2d3748;
+}
+
+/* Label Styles */
+.form-label {
+    font-weight: 500;
+    color: #4a5568;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Input Fields */
+input.form-controls,
+select.form-controls {
+    height: 45px;
+    padding: 0.5rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 8px !important;
+    background-color: white !important;
+    transition: all 0.3s ease;
+}
+
+/* Select Field Specific */
+select.form-controls {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%234a5568' viewBox='0 0 16 16'%3E%3Cpath d='M8 11.5l-5-5h10l-5 5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2.5rem;
+}
+
+/* Focus States */
+.form-controls:focus {
+    border-color: #4a5568 !important;
+    box-shadow: 0 0 0 2px rgba(74, 85, 104, 0.2) !important;
+    outline: none;
+}
+
+/* Submit Button */
+.btn-dark {
+    padding: 0.75rem 2.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+    border-radius: 8px;
+    background-color: #2d3748;
+    border: none;
+    transition: all 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #1a202c;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Spacing Utilities */
+.mt-3 {
+    margin-top: 1rem !important;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .loan-container {
+        margin: 1rem auto;
+    }
+
+    .text h5 {
+        font-size: 1.25rem;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+    }
+
+    input.form-controls,
+    select.form-controls {
+        height: 40px;
+        font-size: 0.9rem;
+    }
+
+    .btn-dark {
+        width: 100%;
+        padding: 0.625rem;
+    }
+}
+@media (max-width: 576px) {
+    #loan_type {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loan-container {
+        padding: 0 0.5rem;
+    }
+
+    .form-controls {
+        padding: 1rem;
+    }
+
+    hr {
+        width: 75%;
+    }
+
+    .text h5 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Number Input Arrows Styling */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    opacity: 1;
+    height: 30px;
+    cursor: pointer;
+}
+
+/* Placeholder Styling */
+::placeholder {
+    color: #a0aec0 !important;
+    opacity: 0.7;
+}
+
+/* Date Input Styling */
+input[type="date"] {
+    cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    padding: 5px;
+    opacity: 0.6;
+    transition: 0.2s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+/* Custom Select Dropdown Styling */
+.form-controls.text-center {
+    appearance: none;
+    cursor: pointer;
+    padding-right: 40px;
+    background: white url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>") no-repeat right 1rem center/16px 12px;
+    transition: all 0.3s ease;
+}
+
+/* Dropdown hover and focus states */
+.form-controls.text-center:hover {
+    background-color: #FFFFFF
+;
+    border-color: #666 !important;
+}
+
+.form-controls.text-center:focus {
+    border-color: #343a40 !important;
+    box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.15);
+    background-color: white;
+}
+
+/* Dropdown options styling */
+select.form-controls option {
+    padding: 12px;
+    background-color: white;
+    color: #343a40;
+    font-size: 0.95rem;
+}
+
+select.form-controls option:hover,
+select.form-controls option:checked {
+    background-color: #FFFFFF
+;
+}
+
+/* First option (placeholder) styling */
+select.form-controls option[value="hidden"] {
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* Calendar Input Styling */
+input[type="date"].form-controls {
+    position: relative;
+    padding-right: 40px;
+    cursor: pointer;
+    background: white;
+}
+
+/* Custom calendar icon */
+input[type="date"]::-webkit-calendar-picker-indicator {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    cursor: pointer;
+    background: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23343a40' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><rect x='3' y='4' width='18' height='18' rx='2' ry='2'></rect><line x1='16' y1='2' x2='16' y2='6'></line><line x1='8' y1='2' x2='8' y2='6'></line><line x1='3' y1='10' x2='21' y2='10'></line></svg>") center/contain no-repeat;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+}
+
+/* Calendar dropdown styling */
+input[type="date"]::-webkit-datetime-edit {
+    padding: 0 6px;
+}
+
+input[type="date"]::-webkit-datetime-edit-fields-wrapper {
+    padding: 0;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .form-controls.text-center,
+    input[type="date"].form-controls {
+        font-size: 16px; /* Prevents zoom on mobile */
+        height: 48px; /* Larger touch target */
+        padding: 10px 40px 10px 15px;
+    }
+
+    select.form-controls option {
+        padding: 15px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-controls.text-center,
+    input[type="date"].form-controls {
+        padding: 8px 35px 8px 12px;
+    }
+
+    input[type="date"]::-webkit-calendar-picker-indicator {
+        width: 18px;
+        height: 18px;
+        right: 8px;
+    }
+}
+
+/* Touch device optimizations */
+@media (hover: none) {
+    .form-controls.text-center,
+    input[type="date"].form-controls {
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    select.form-controls option {
+        padding: 18px 12px;
+    }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .form-controls.text-center,
+    input[type="date"].form-controls {
+        background-color: #2d3748;
+        color: white;
+        border-color: #4a5568 !important;
+    }
+
+    select.form-controls option {
+        background-color: #2d3748;
+        color: white;
+    }
+
+    select.form-controls option:hover,
+    select.form-controls option:checked {
+        background-color: #4a5568;
+    }
+}
+ 

@@ -1,0 +1,244 @@
+#table-responsive-container {
+   
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 2rem auto;
+    margin-top:-20px;
+}
+
+#muster-table {
+    background: white;
+    margin-bottom: 0 !important;
+    width: 100%;
+    border-collapse: collapse;
+   
+}
+
+/* Header Styles */
+#muster-table-header {
+    background-color:red;
+    color: black;
+    border: 0.4px solid black;
+}
+
+#muster-table th {
+    padding: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.5px;
+    
+    text-align: center;
+}
+
+#muster-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#muster-table tbody tr:hover {
+    background-color: #FFFFFF
+;
+    transform: scale(1.002);
+   
+}
+
+#muster-title {
+    color: #2193b0;
+    font-weight: 600;
+    margin: 2rem 0 1rem;
+    font-size: 1.5rem;
+    text-align: center;
+    margin-top:-10px;
+}
+
+#muster-divider {
+    height: 3px;
+    background:#6dd5ed;
+    border: none;
+    border-radius: 2px;
+    margin: 1rem auto;
+    width: 25%;
+}
+/* Base styles */
+/* Base Container */
+#muster-column {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1.5rem;
+}
+
+/* Title Styling */
+#muster-title {
+    color: #2c3e50;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+#muster-divider {
+    width: 100px;
+    height: 2px;
+    background: #2c3e50;
+    border: none;
+    margin: 1rem auto 2rem;
+    opacity: 0.2;
+}
+
+/* Table Container */
+#table-responsive-container {
+    border-radius: 4px;
+    overflow: auto;
+    background: white;
+    margin-bottom: 2rem;
+    border: 1px solid #e2e8f0;
+}
+
+/* Scrollbar Styling */
+#table-responsive-container::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+#table-responsive-container::-webkit-scrollbar-track {
+    background: #FFFFFF
+;
+}
+
+#table-responsive-container::-webkit-scrollbar-thumb {
+    background: #dee2e6;
+    border-radius: 3px;
+}
+
+/* Main Table Styling */
+#muster-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 800px;
+    background: white;
+}
+
+/* Header Styling */
+#muster-table-header tr {
+    background: #FFFFFF
+;
+    border: 1px solid #e2e8f0;
+}
+
+#muster-table th {
+    color: #2c3e50;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    padding: 0.875rem;
+    text-align: center;
+    border: 1px solid #e2e8f0;
+    letter-spacing: 0.5px;
+    background: #FFFFFF
+;
+}
+
+/* Table Body Styling */
+#muster-table td {
+    padding: 0.875rem;
+    font-size: 0.9rem;
+    color: #4a5568;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    vertical-align: middle;
+    background: white;
+}
+
+/* Row Interactions */
+#muster-table tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+#muster-table tbody tr:hover {
+    background-color: #f8fafc;
+}
+
+/* Status Column */
+#muster-table td:last-child {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+/* Even Row Styling */
+#muster-table tbody tr:nth-child(even) {
+    background-color: #fbfbfd;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1200px) {
+    #muster-column {
+        padding: 1rem;
+    }
+    
+    #muster-table th,
+    #muster-table td {
+        padding: 0.75rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #muster-title {
+        font-size: 1.25rem;
+    }
+    
+    #table-responsive-container {
+        margin: 0;
+        border-width: 0 1px;
+    }
+    
+    #muster-table th,
+    #muster-table td {
+        padding: 0.625rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #muster-column {
+        padding: 0.75rem;
+    }
+    
+    #muster-title {
+        font-size: 1.125rem;
+    }
+    
+    #muster-divider {
+        width: 80px;
+        margin: 0.75rem auto 1.5rem;
+    }
+    
+    #muster-table th,
+    #muster-table td {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Print Styles */
+@media print {
+    #table-responsive-container {
+        border: 1px solid #e2e8f0;
+    }
+    
+    #muster-table th {
+        background-color: #FFFFFF
+ !important;
+        color: #2c3e50 !important;
+    }
+    
+    #muster-table td {
+        color: #4a5568 !important;
+    }
+}
+        

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block page_title %}
+<li class="breadcrumb-item text-center mb-3">
+    <a href="/dashboard" class="text-decoration-none">
+        <small>Edit Banking Info</small>
+    </a>
+</li>
+{% endblock %}
+
+
+{% block content %}
+
+<link rel="stylesheet" href="{% static 'css/edit_banking_info.css' %}">
+
+<div class="form-container">
+    <h3 class='mt-2'>Edit Banking & Financial Information</h3>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="submit-btn">Save Changes</button>
+    </form>
+    <a href="{% url 'profile' %}" class="cancel-btn">Cancel</a>
+</div>
+
+{% endblock %}

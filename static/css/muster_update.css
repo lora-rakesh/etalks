@@ -1,0 +1,213 @@
+
+/* General reset */
+* {
+    /* margin: 0; */
+    /* padding: 0; */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+  
+}
+
+.container {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #5f6368;
+    margin-bottom: 30px;
+}
+
+h1, .table h1 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+
+/* Employee Details */
+p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* Form Styling */
+form {
+    margin-top: 30px;
+    width: 500px;
+    display:flex;
+    flex-direction: column;
+    /* gap: 20px; */
+    padding-right: 100px;
+    padding-left: 18px;
+}
+
+
+label {
+    
+    font-size: 1rem;
+    font-weight: 500;
+    margin-top: 5px;
+
+}
+
+input, select, textarea {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    /* padding-right: 150px; */
+    /* padding-bottom: 10px; */
+    
+}
+
+input[type="date"],
+input[type="time"],
+textarea {
+    width: 100%;
+    
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    margin-top: 15px;
+    padding: 12px;
+    background-color: #92979d;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #555 ;
+}
+
+.back-link {
+    display: inline-block;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* Table Styling */
+table {
+    width: 98%;
+    /* margin-top: 500px; */
+    border-collapse: collapse;
+    margin-top: 50px;
+    margin-right: 10px;
+}
+
+table th, table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+table th {
+    background-color: #92979d;
+    color: #fff;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+table td {
+    font-size: 0.9rem;
+}
+
+/* Button - Home link */
+.btn-home {
+    display:inline-block;
+    padding: 12px 20px;
+    background-color: #92979d;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+    margin-left: 300px;
+}
+
+.btn-home:hover {
+    background-color: #555;
+}
+
+/* Media Queries for responsiveness */
+@media (max-width: 768px) {
+    .container {
+        width: 90%;
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    table th, table td {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    form {
+        gap: 15px;
+    }
+
+    input, select, textarea {
+        padding: 8px;
+        font-size: 0.85rem;
+    }
+
+    button {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    .back-link, .btn-home {
+        font-size: 0.9rem;
+    }
+}
+

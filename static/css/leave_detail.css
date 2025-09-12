@@ -1,0 +1,90 @@
+.card {
+    background: white;
+    
+    margin: 2rem auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.card-header {
+    background:#0191B4
+;
+    padding: 1.5rem;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.card-header h5 {
+    font-size: 1.25rem;
+    color: #2d3748;
+    margin: 0;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.leave-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.leave-item {
+    background:rgb(235, 235, 235);
+    padding: 1.25rem;
+    border-radius: 6px;
+    transition: transform 0.2s;
+}
+
+.leave-item:hover {
+    transform: translateY(-2px);
+}
+
+.leave-label {
+    font-size: 0.875rem;
+    color: #6b7280;
+    margin-bottom: 0.5rem;
+}
+
+.leave-value {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2d3748;
+}
+
+.back-link {
+    display: inline-block;
+    background-color: #0191B4
+;
+    color:white;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.back-link:hover {
+    background:#1d4ed8;
+    color:rgb(48, 49, 48);
+}
+
+@media (max-width: 640px) {
+    .card {
+        margin: 1rem;
+    }
+
+    .card-header {
+        padding: 1rem;
+    }
+
+    .card-content {
+        padding: 1rem;
+    }
+
+    .leave-grid {
+        gap: 1rem;
+    }
+}

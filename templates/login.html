@@ -1,0 +1,80 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS & JS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Merienda&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+
+    <title>AIHR4U | Login</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-lg transparent"></nav>
+
+    <div class="row container mt-5">
+        <div class="col-sm image-container mt-5 pt-5">
+            <img src="{% static 'images/lora-log.png' %}" alt="AIHR4U Logo">
+        </div>
+
+        <div class="col-sm-5 form mt-5">
+            <h3 class="mx-auto">Login</h3>
+            <hr class="col-8">
+            <p class="text pb-3">AIHR4U where AI meets your workforce.</p>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <div class="col-8 mb-3">
+                    <label class="form-label">Employee ID</label>
+                    <input class="form-control" type="text" id="username" name="username" placeholder="Employee ID" required>
+                </div>
+
+                <div class="col-8 mb-3">
+                    <label class="form-label">Password</label>
+                    <input class="form-control" type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+
+                <input type="hidden" name="company_id" value="{{ company_id }}">
+
+                <div id="butt" class="col-8 password-links d-flex justify-content-between">
+                    <a href="{% url 'forgot_password' %}" class="forgot-password">Forgot Password?</a>
+                    <a id="reset" href="{% url 'reset_password' %}" class="reset-password">Reset Password?</a>
+                </div>
+
+                <button type="submit" class="btn btn-outline-success mt-3">Login</button>
+
+                            <div class="mt-3">
+                {% if message %}
+                    <p class="text-center text-danger"><strong>{{ message }}</strong></p>
+                    {% if "locked" in message|lower %}
+                        <form action="{% url 'send_unlock_request' %}" method="post" class="text-center mt-2">
+                            {% csrf_token %}
+                            <input type="hidden" name="username" value="{{ username }}">
+                            <input type="hidden" name="company_id" value="{{ company_id }}">
+                           <a href="{% url 'send_unlock_request' user.id %}" class="btn btn-warning">
+                                Send Unlock Request
+                            </a>
+
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+            </form>
+        </div>
+    </div>
+
+    {% include 'partials/bootjs.html' %}
+
+</body>
+</html>
