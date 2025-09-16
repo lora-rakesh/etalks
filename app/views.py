@@ -4255,21 +4255,23 @@ def delete_logo(request):
     if company and company.logo:
         company.logo.delete(save=True)  # Delete from storage and DB
     return redirect("manage_logo")
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q, CharField, Value
 from django.db.models.functions import Concat
-from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from .models import CustomUser, Message
 
 @login_required
 def chat_view(request):
+    """Render the main chat page."""
     return render(request, "etalks.html")
+
 
 @login_required
 def users_list(request):
+    """Return list of users in the same company."""
     company = request.user.company
     users = CustomUser.objects.filter(company=company).exclude(id=request.user.id)
     results = [
@@ -4280,8 +4282,10 @@ def users_list(request):
     ]
     return JsonResponse({"results": results})
 
+
 @login_required
 def search_users(request):
+    """Search users by name, employee_id, or email."""
     query = request.GET.get("q", "").strip()
     results = []
     if query:
@@ -4290,20 +4294,23 @@ def search_users(request):
         users = users.annotate(
             full_name=Concat("first_name", Value(" "), "last_name", output_field=CharField())
         ).filter(
-            Q(full_name__icontains=query)
-            | Q(employee_id__icontains=query)
-            | Q(email__icontains=query)
+            Q(full_name__icontains=query) |
+            Q(employee_id__icontains=query) |
+            Q(email__icontains=query)
         )[:10]
         results = [{"id": u.id, "employee_id": u.employee_id,
                     "name": u.full_name, "email": u.email} for u in users]
     return JsonResponse({"results": results})
 
+
 @login_required
 def recent_chats(request):
+    """Return recent chats with unread count."""
     user = request.user
     messages = Message.objects.filter(Q(sender=user) | Q(receiver=user)).order_by("-timestamp")
     seen = set()
     results = []
+
     for msg in messages:
         other = msg.receiver if msg.sender == user else msg.sender
         if other.id in seen:
@@ -4320,32 +4327,53 @@ def recent_chats(request):
             "unread": unread_count,
         })
     return JsonResponse({"results": results})
+
+
 @login_required
 def get_messages(request, user_id):
+    """Fetch all messages between the logged-in user and another user."""
     other_user = get_object_or_404(CustomUser, id=user_id)
     messages = Message.objects.filter(
         Q(sender=request.user, receiver=other_user) | Q(sender=other_user, receiver=request.user)
     ).order_by('timestamp')
 
-    data = [{"sender": m.sender.username, "message": m.content, "timestamp": m.timestamp} for m in messages]
+    # Mark unread messages as read
+    Message.objects.filter(sender=other_user, receiver=request.user, is_read=False).update(is_read=True)
+
+    data = [
+        {
+            "sender": m.sender.username,
+            "message": m.content,
+            "timestamp": m.timestamp.strftime("%H:%M"),
+        }
+        for m in messages
+    ]
     return JsonResponse(data, safe=False)
 
-@csrf_exempt
+
 @login_required
 def send_message(request, user_id):
+    """Send a new message to a user via AJAX."""
     if request.method == "POST":
         user = request.user
-        other = CustomUser.objects.get(id=user_id)
-        message_text = request.POST.get("message")
-        msg = Message.objects.create(sender=user, receiver=other, content=message_text, timestamp=timezone.now())
-        return JsonResponse({
-            "id": msg.id,
-            "sender": msg.sender.id,
-            "receiver": msg.receiver.id,
-            "message": msg.content,
-            "timestamp": msg.timestamp.strftime("%H:%M"),
-        })
-
+        other_user = get_object_or_404(CustomUser, id=user_id)
+        message_text = request.POST.get("message", "").strip()
+        if message_text:
+            msg = Message.objects.create(
+                sender=user,
+                receiver=other_user,
+                content=message_text,
+                timestamp=timezone.now()
+            )
+            return JsonResponse({
+                "id": msg.id,
+                "sender": {"id": user.id, "name": f"{user.first_name} {user.last_name}"},
+                "receiver": {"id": other_user.id, "name": f"{other_user.first_name} {other_user.last_name}"},
+                "message": msg.content,
+                "timestamp": msg.timestamp.strftime("%H:%M"),
+            })
+        return JsonResponse({"error": "Empty message"}, status=400)
+    return JsonResponse({"error": "Invalid request"}, status=400)
 
 @login_required
 def call_history(request):

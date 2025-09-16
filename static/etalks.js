@@ -21,7 +21,9 @@ let currentUserId = parseInt(document.body.dataset.userId);
 const wsScheme = window.location.protocol === "https:" ? "wss" : "ws";
 let chatSocket = new WebSocket(`${wsScheme}://${window.location.host}/ws/chat/`);
 
+// -----------------------
 // Reconnect logic
+// -----------------------
 chatSocket.onclose = function () {
   console.log("WebSocket closed, reconnecting...");
   setTimeout(() => {
@@ -30,21 +32,61 @@ chatSocket.onclose = function () {
   }, 1000);
 };
 
+const socket = new WebSocket(
+    `ws://${window.location.host}/ws/chat/`
+);
+
+// When connection opens
+socket.onopen = function(e) {
+    console.log("WebSocket connected!");
+};
+
+// When message is received
+socket.onmessage = function(e) {
+    const data = JSON.parse(e.data);
+    console.log("New message:", data);
+    // TODO: update chat UI here
+};
+
+// Sending a message
+function sendMessage(senderId, receiverId, message) {
+    socket.send(JSON.stringify({
+        sender_id: senderId,
+        receiver_id: receiverId,
+        message: message
+    }));
+}
+
 function attachSocketEvents() {
   chatSocket.onmessage = function (e) {
     const data = JSON.parse(e.data);
+
     if (data.action === "new_message") {
+      // Show message in chat if selected
       if (selectedUser && data.sender_id === selectedUser.id) {
         appendMessage("received", data.sender_name, data.message);
       } else {
+        // Show unread badge
         const badge = document.getElementById(`unread-${data.sender_id}`);
         if (badge) badge.textContent = "•";
       }
-      loadRecentChats();
+
+      // Move user to top in sidebar
+      moveUserToTop(data.sender_id);
     }
   };
 }
 attachSocketEvents();
+
+// -----------------------
+// Move user to top in sidebar
+// -----------------------
+function moveUserToTop(userId) {
+  const userDiv = document.querySelector(`.sidebar-user[data-id='${userId}']`);
+  if (userDiv) {
+    usersList.prepend(userDiv);
+  }
+}
 
 // -----------------------
 // Load users
@@ -95,6 +137,7 @@ async function selectUser(user, div) {
   document.querySelectorAll(".sidebar-user").forEach(el => el.classList.remove("selected"));
   div.classList.add("selected");
 
+  // Clear unread badge
   document.getElementById(`unread-${user.id}`).textContent = "";
 
   try {
@@ -129,7 +172,8 @@ function sendMessage() {
   appendMessage("sent", "You", message);
   chatInput.value = "";
 
-  loadRecentChats();
+  // Move user to top immediately
+  moveUserToTop(selectedUser.id);
 }
 
 sendBtn.onclick = sendMessage;
@@ -149,7 +193,7 @@ function appendMessage(type, sender, message) {
 }
 
 // -----------------------
-// Load recent chats
+// Load recent chats (on page load)
 // -----------------------
 async function loadRecentChats() {
   try {

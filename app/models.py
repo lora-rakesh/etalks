@@ -676,6 +676,7 @@ class Message(models.Model):
     )
     content = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+    is_read = models.BooleanField(default=False)
 
     class Meta:
         ordering = ["timestamp"]
@@ -683,6 +684,14 @@ class Message(models.Model):
     def __str__(self):
         return f"{self.sender} → {self.receiver}: {self.content[:20]}"
 
+class RecentChat(models.Model):
+    user = models.ForeignKey(CustomUser, related_name='recent_chats', on_delete=models.CASCADE)
+    other_user = models.ForeignKey(CustomUser, related_name='+', on_delete=models.CASCADE)
+    last_message = models.TextField()
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"{self.user} - {self.other_user}"
 
 # -------------------------------
 # Call Model (Audio/Video)

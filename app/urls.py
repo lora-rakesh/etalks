@@ -30,7 +30,8 @@ urlpatterns = [
     path("call-history/", views.call_history, name="call_history"),
     path("recent-chats/", views.recent_chats, name="recent_chats"),
     path('messages/<int:user_id>/', views.get_messages, name='get_messages'),
-    path("send-message/", views.send_message, name="send_message"),
+    path("send-message/<int:user_id>/", views.send_message, name="send_message"),
+
 
     #  Dashboard #
     path('dashboard', views.dashboard, name='dashboard'),
