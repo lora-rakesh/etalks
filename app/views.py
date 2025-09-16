@@ -4255,94 +4255,111 @@ def delete_logo(request):
     if company and company.logo:
         company.logo.delete(save=True)  # Delete from storage and DB
     return redirect("manage_logo")
-
-
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
+from django.shortcuts import render
 from django.http import JsonResponse
-from django.views.generic import TemplateView
-from django.db.models import Q
-from .models import CustomUser, Message
+from django.contrib.auth.decorators import login_required
+from django.db.models import Q, CharField, Value
+from django.db.models.functions import Concat
+from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
-
-
-@method_decorator(login_required, name="dispatch")
-class eTalksView(TemplateView):
-    template_name = "etalks.html"
-
-    def get_context_data(self, **kwargs):
-        ctx = super().get_context_data(**kwargs)
-        u = self.request.user
-        ctx["me"] = {
-            "employee_id": u.employee_id,
-            "name": f"{u.first_name} {u.last_name}".strip(),
-        }
-        return ctx
-
+from .models import CustomUser, Message
 
 @login_required
-def get_messages(request):
-    room = request.GET.get('room')
-    if not room:
-        return JsonResponse({"messages": []})
-
-    messages = Message.objects.filter(room=room).order_by("created_at")
-
-    messages_data = [
-        {
-            "sender_id": msg.sender.employee_id,
-            "text": msg.text,
-            "timestamp": msg.created_at.strftime("%Y-%m-%d %H:%M:%S")
-        }
-        for msg in messages
-    ]
-    return JsonResponse({"messages": messages_data})
+def chat_view(request):
+    return render(request, "etalks.html")
 
 @login_required
-def employee_search(request):
-    q = request.GET.get("q", "").strip()
-    company = request.user.company_id
-
-    qs = CustomUser.objects.filter(is_active=True)
-    if company:
-        qs = qs.filter(company_id=company)
-
-    if q:
-        qs = qs.filter(
-            Q(employee_id__icontains=q) |
-            Q(first_name__icontains=q) |
-            Q(last_name__icontains=q)
-        )
-
-    qs = qs.only("employee_id", "first_name", "last_name").order_by("first_name")[:20]
-
-    data = [
-        {
-            "employee_id": u.employee_id,
-            "name": (f"{u.first_name} {u.last_name}".strip() or u.username),
-        }
-        for u in qs if u.employee_id != request.user.employee_id
+def users_list(request):
+    company = request.user.company
+    users = CustomUser.objects.filter(company=company).exclude(id=request.user.id)
+    results = [
+        {"id": u.id, "employee_id": u.employee_id,
+         "name": f"{u.first_name} {u.last_name}".strip(),
+         "email": u.email}
+        for u in users
     ]
-    return JsonResponse({"results": data})
+    return JsonResponse({"results": results})
 
-
+@login_required
+def search_users(request):
+    query = request.GET.get("q", "").strip()
+    results = []
+    if query:
+        company = request.user.company
+        users = CustomUser.objects.filter(company=company).exclude(id=request.user.id)
+        users = users.annotate(
+            full_name=Concat("first_name", Value(" "), "last_name", output_field=CharField())
+        ).filter(
+            Q(full_name__icontains=query)
+            | Q(employee_id__icontains=query)
+            | Q(email__icontains=query)
+        )[:10]
+        results = [{"id": u.id, "employee_id": u.employee_id,
+                    "name": u.full_name, "email": u.email} for u in users]
+    return JsonResponse({"results": results})
 
 @login_required
 def recent_chats(request):
     user = request.user
-    msgs = Message.objects.filter(
-        Q(sender=user) | Q(receiver=user)
-    ).select_related('sender', 'receiver').order_by('-created_at')[:50]
+    messages = Message.objects.filter(Q(sender=user) | Q(receiver=user)).order_by("-timestamp")
+    seen = set()
+    results = []
+    for msg in messages:
+        other = msg.receiver if msg.sender == user else msg.sender
+        if other.id in seen:
+            continue
+        seen.add(other.id)
+        unread_count = Message.objects.filter(sender=other, receiver=user, is_read=False).count()
+        results.append({
+            "id": other.id,
+            "name": f"{other.first_name} {other.last_name}".strip(),
+            "employee_id": other.employee_id,
+            "email": other.email,
+            "last_message": msg.content,
+            "timestamp": msg.timestamp.strftime("%Y-%m-%d %H:%M"),
+            "unread": unread_count,
+        })
+    return JsonResponse({"results": results})
+@login_required
+def get_messages(request, user_id):
+    other_user = get_object_or_404(CustomUser, id=user_id)
+    messages = Message.objects.filter(
+        Q(sender=request.user, receiver=other_user) | Q(sender=other_user, receiver=request.user)
+    ).order_by('timestamp')
 
-    recent = {}
-    for m in msgs:
-        other = m.receiver if m.sender == user else m.sender
-        if other.employee_id not in recent:
-            recent[other.employee_id] = {
-                "employee_id": other.employee_id,
-                "name": f"{other.first_name} {other.last_name}".strip(),
-                "last_text": m.text,
-                "timestamp": m.created_at.isoformat()
-            }
+    data = [{"sender": m.sender.username, "message": m.content, "timestamp": m.timestamp} for m in messages]
+    return JsonResponse(data, safe=False)
 
-    return JsonResponse({"recent": list(recent.values())})
+@csrf_exempt
+@login_required
+def send_message(request, user_id):
+    if request.method == "POST":
+        user = request.user
+        other = CustomUser.objects.get(id=user_id)
+        message_text = request.POST.get("message")
+        msg = Message.objects.create(sender=user, receiver=other, content=message_text, timestamp=timezone.now())
+        return JsonResponse({
+            "id": msg.id,
+            "sender": msg.sender.id,
+            "receiver": msg.receiver.id,
+            "message": msg.content,
+            "timestamp": msg.timestamp.strftime("%H:%M"),
+        })
+
+
+@login_required
+def call_history(request):
+    """Return call history of logged-in user."""
+    calls = Call.objects.filter(Q(caller=request.user) | Q(receiver=request.user))
+
+    data = []
+    for c in calls:
+        data.append({
+            "caller": c.caller.username,
+            "receiver": c.receiver.username,
+            "type": c.call_type,
+            "status": c.status,
+            "started": c.started_at,
+        })
+
+    return JsonResponse(data, safe=False)

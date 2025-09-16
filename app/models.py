@@ -660,59 +660,59 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question
-
 from django.db import models
 from django.conf import settings
-
-
 class Message(models.Model):
     room = models.CharField(max_length=255)
-
     sender = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        to_field="employee_id",          # 👈 use employee_id instead of id
-        db_column="sender_id",
         on_delete=models.CASCADE,
-        related_name="sent_msgs"
+        related_name="sent_messages"
     )
     receiver = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        to_field="employee_id",          # 👈 use employee_id instead of id
-        db_column="receiver_id",
         on_delete=models.CASCADE,
-        related_name="recv_msgs"
+        related_name="received_messages"
     )
+    content = models.TextField()
+    timestamp = models.DateTimeField(auto_now_add=True)
 
-    text = models.TextField(blank=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+    class Meta:
+        ordering = ["timestamp"]
 
     def __str__(self):
-        return f"{self.sender} → {self.receiver}: {self.text[:30]}"
+        return f"{self.sender} → {self.receiver}: {self.content[:20]}"
 
 
-class CallLog(models.Model):
+# -------------------------------
+# Call Model (Audio/Video)
+# -------------------------------
+class Call(models.Model):
+    CALL_TYPES = (
+        ("audio", "Audio"),
+        ("video", "Video"),
+    )
     caller = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        to_field="employee_id",          # 👈 use employee_id
-        db_column="caller_id",
         on_delete=models.CASCADE,
-        related_name="calls_made"
+        related_name="outgoing_calls"
     )
-    callee = models.ForeignKey(
+    receiver = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        to_field="employee_id",          # 👈 use employee_id
-        db_column="callee_id",
         on_delete=models.CASCADE,
-        related_name="calls_received"
+        related_name="incoming_calls"
+    )
+    call_type = models.CharField(max_length=10, choices=CALL_TYPES)
+    started_at = models.DateTimeField(auto_now_add=True)
+    ended_at = models.DateTimeField(null=True, blank=True)
+    status = models.CharField(
+        max_length=20,
+        choices=[("ongoing", "Ongoing"), ("ended", "Ended"), ("missed", "Missed")],
+        default="ongoing"
     )
 
-    call_type = models.CharField(
-        max_length=10,
-        choices=[("audio", "Audio"), ("video", "Video")]
-    )
-    started_at = models.DateTimeField(null=True, blank=True)
-    ended_at = models.DateTimeField(null=True, blank=True)
-    status = models.CharField(max_length=20, default="missed")
+    class Meta:
+        ordering = ["-started_at"]
 
     def __str__(self):
-        return f"{self.caller} → {self.callee} ({self.call_type})"
+        return f"{self.call_type.title()} Call ({self.caller} → {self.receiver}) [{self.status}]"

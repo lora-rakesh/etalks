@@ -146,34 +146,3 @@ class CareerResourceAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('title',)}
 
 
-
-from django.contrib import admin
-from .models import Message, CallLog
-
-
-@admin.register(Message)
-class MessageAdmin(admin.ModelAdmin):
-    list_display = ("id", "room", "sender", "receiver", "short_text", "created_at")
-    list_filter = ("room", "created_at")
-    search_fields = ("text", "sender__username", "receiver__username")
-    ordering = ("-created_at",)
-
-    def short_text(self, obj):
-        return obj.text[:50] + ("..." if len(obj.text) > 50 else "")
-    short_text.short_description = "Message"
-
-
-@admin.register(CallLog)
-class CallLogAdmin(admin.ModelAdmin):
-    list_display = (
-        "id",
-        "caller",
-        "callee",
-        "call_type",
-        "status",
-        "started_at",
-        "ended_at",
-    )
-    list_filter = ("call_type", "status", "started_at")
-    search_fields = ("caller__username", "callee__username")
-    ordering = ("-started_at",)

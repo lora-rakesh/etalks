@@ -28,10 +28,20 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap4',
     'rest_framework',
- 
+    'channels',
     # Local app
     'app',
 ]
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
+
  
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
  
@@ -279,7 +289,7 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CORS_ALLOW_ALL_ORIGINS = True
  
- 
+ASGI_APPLICATION = "project.asgi.application"
 # Auth
 AUTH_USER_MODEL = 'app.CustomUser'
 LOGOUT_REDIRECT_URL = '/'

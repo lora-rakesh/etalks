@@ -24,13 +24,14 @@ urlpatterns = [
     #  Login/Logout url #
     path('login', views.loginview, name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path("etalks/", views.chat_view, name="chat_view"),
+    path("users/", views.users_list, name="users_list"),
+    path("search-users/", views.search_users, name="search_users"),
+    path("call-history/", views.call_history, name="call_history"),
+    path("recent-chats/", views.recent_chats, name="recent_chats"),
+    path('messages/<int:user_id>/', views.get_messages, name='get_messages'),
+    path("send-message/", views.send_message, name="send_message"),
 
-    path('etalks/', views.eTalksView.as_view(), name='etalks'),
-    path('etalks/messages/', views.get_messages, name='get_messages'),
-    path('etalks/employee_search/', views.employee_search, name='employee_search'),  # Make sure this exists
-    path('etalks/recent_chats/', views.recent_chats, name='recent_chats'),
-
-    
     #  Dashboard #
     path('dashboard', views.dashboard, name='dashboard'),
     path('search/', views.search_results, name='search_results'),
